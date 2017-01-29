@@ -1,0 +1,54 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			Feedback
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+	<ion-card>
+		<ion-card-header>
+			Directive in own page
+		</ion-card-header>
+
+		<ion-list>
+			<button ion-item (click)="goToFeedbackPage()">
+				Go to page
+			</button>
+		</ion-list>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header>
+			Provided modal
+		</ion-card-header>
+
+		<ion-list>
+			<button ion-item (click)="openModal()">
+				Open modal
+			</button>
+		</ion-list>
+
+		<ion-list radio-group>
+			<ion-item *ngFor="let language of languages">
+				<ion-label>{{language}}</ion-label>
+				<ion-radio checked="{{language === selectedLanguage}}" value="{{language}}" (ionSelect)="changeLanguage(language)"></ion-radio>
+			</ion-item>
+		</ion-list>
+
+		<ion-item *ngIf="selectedLanguage === 'custom'">
+			<ion-label fixed>title</ion-label>
+			<ion-input type="text" [(ngModel)]="translation.title"></ion-input>
+		</ion-item>
+
+		<ion-item *ngIf="selectedLanguage === 'custom'">
+			<ion-label fixed>cancel</ion-label>
+			<ion-input type="text" [(ngModel)]="translation.cancel"></ion-input>
+		</ion-item>
+
+
+	</ion-card>
+
+</ion-content>
