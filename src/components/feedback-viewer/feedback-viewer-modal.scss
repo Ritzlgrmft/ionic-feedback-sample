@@ -1,0 +1,17 @@
+ionic-feedback-viewer-modal {
+    ion-select {
+        width: 100%;
+        max-width: 100%;
+    }
+    .select-ios {
+        padding-left: 0;
+    }
+    .screenshot {
+        width: 66%;
+        display: block;
+        margin: auto;
+        border-color: color($colors, primary);
+        border-style: solid;
+        border-width: medium;
+    }
+}

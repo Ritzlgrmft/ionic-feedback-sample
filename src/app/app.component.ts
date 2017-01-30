@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { Platform } from "ionic-angular";
 
-import { FeedbackPage } from "../pages/feedback/feedback";
+import { HomePage } from "../pages/home/home";
 
 /**
  * Root component of the app.
@@ -14,7 +14,7 @@ export class AppComponent {
 	/**
 	 * Root page of the app.
 	 */
-	public rootPage = FeedbackPage;
+	public rootPage = HomePage;
 
 	constructor(platform: Platform) {
 		platform.ready().then(() => {

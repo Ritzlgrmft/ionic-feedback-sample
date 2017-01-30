@@ -1,8 +1,7 @@
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
 
-import { FeedbackPage } from "../feedback/feedback";
-// import { FeedbackViewerModalManager, FeedbackViewerTranslation } from "ionic-feedback-viewer";
+import { FeedbackViewerModalManager, FeedbackViewerTranslation } from "../../components/feedback-viewer";
 
 /**
  * Home page.
@@ -22,37 +21,33 @@ export class HomePage {
 	 */
 	public selectedLanguage: string;
 
-	// /**
-	//  * Custom translation, used if selectedLanguage === "custom"
-	//  */
-	// public translation: FeedbackViewerTranslation;
+	/**
+	 * Custom translation, used if selectedLanguage === "custom"
+	 */
+	public translation: FeedbackViewerTranslation;
 
 	constructor(
-		private navController: NavController
-		// private feedbackViewerModalManager: FeedbackViewerModalManager
-	) {
+		private navController: NavController,
+		private feedbackViewerModalManager: FeedbackViewerModalManager) {
 
 		this.languages = ["en", "de", "custom"];
 		this.selectedLanguage = "en";
-		// this.translation = { title: "myTitle", cancel: "myCancel" };
+		this.translation = { title: "myTitle", cancel: "myCancel" };
 	}
 
-	/**
-	 * Go to feedback page.
-	 */
-	public goToFeedbackPage(): void {
-		this.navController.push(FeedbackPage);
+	public ionViewDidEnter(): void {
+		this.openModal();
 	}
 
 	/**
 	 * Open feedback modal.
 	 */
 	public openModal(): void {
-		// if (this.selectedLanguage === "custom") {
-		// 	this.feedbackViewerModalManager.openModal(undefined, this.translation);
-		// } else {
-		// 	this.feedbackViewerModalManager.openModal(this.selectedLanguage);
-		// }
+		if (this.selectedLanguage === "custom") {
+			this.feedbackViewerModalManager.openModal(undefined, this.translation);
+		} else {
+			this.feedbackViewerModalManager.openModal(this.selectedLanguage);
+		}
 	}
 
 	/**

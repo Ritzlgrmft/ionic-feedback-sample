@@ -1,0 +1,48 @@
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-title>{{ getTranslation().title }}</ion-title>
+		<ion-buttons start>
+			<button ion-button hideWhen="android,windows" (click)="onClose()"> 
+				{{ getTranslation().cancel }} 
+			</button>
+			<button ion-button icon-only showWhen="android,windows" (click)="onClose()"> 
+				<ion-icon name=\"md-close\"></ion-icon> 
+			</button>
+		</ion-buttons>
+		<ion-buttons end>
+			<button ion-button (click)="onSend()" [disabled]="sendDisabled">
+				Send
+			</button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+<ion-content>
+	<ion-list>
+
+		<ion-item>
+			<ion-select [(ngModel)]="category">
+				<ion-option *ngFor="let c of categories" [value]="c">{{c}}</ion-option>
+				<ion-option value="m">Male</ion-option>
+			</ion-select>
+		</ion-item>
+
+		<ion-item>
+			<ion-textarea rows="6" placeholder="Message" [(ngModel)]="message"></ion-textarea>
+		</ion-item>
+
+		<ion-item>
+			<ion-input type="email" placeholder="Email" [(ngModel)]="email"></ion-input>
+		</ion-item>
+
+		<ion-item *ngIf="showScreenshot">
+			<ion-label>Include Screenshot</ion-label>
+			<ion-checkbox [(ngModel)]="includeScreenshot"></ion-checkbox>
+		</ion-item>
+
+		<ion-item *ngIf="showScreenshot && includeScreenshot">
+			<img class="screenshot" [src]="screenshot" />
+		</ion-item>
+
+	</ion-list>
+
+</ion-content>
