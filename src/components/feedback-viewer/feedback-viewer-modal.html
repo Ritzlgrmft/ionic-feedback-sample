@@ -11,7 +11,7 @@
 		</ion-buttons>
 		<ion-buttons end>
 			<button ion-button (click)="onSend()" [disabled]="sendDisabled">
-				Send
+				{{ getTranslation().send }}
 			</button>
 		</ion-buttons>
 	</ion-toolbar>
@@ -19,23 +19,22 @@
 <ion-content>
 	<ion-list>
 
-		<ion-item>
+		<ion-item *ngIf="showCategories">
 			<ion-select [(ngModel)]="category">
 				<ion-option *ngFor="let c of categories" [value]="c">{{c}}</ion-option>
-				<ion-option value="m">Male</ion-option>
 			</ion-select>
 		</ion-item>
 
 		<ion-item>
-			<ion-textarea rows="6" placeholder="Message" [(ngModel)]="message"></ion-textarea>
+			<ion-textarea rows="6" placeholder="{{ getTranslation().message }}" [(ngModel)]="message"></ion-textarea>
 		</ion-item>
 
 		<ion-item>
-			<ion-input type="email" placeholder="Email" [(ngModel)]="email"></ion-input>
+			<ion-input type="email" placeholder="{{ getTranslation().email }}" [(ngModel)]="email"></ion-input>
 		</ion-item>
 
 		<ion-item *ngIf="showScreenshot">
-			<ion-label>Include Screenshot</ion-label>
+			<ion-label>{{ getTranslation().includeScreenshot }}</ion-label>
 			<ion-checkbox [(ngModel)]="includeScreenshot"></ion-checkbox>
 		</ion-item>
 

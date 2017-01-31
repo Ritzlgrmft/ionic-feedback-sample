@@ -36,24 +36,30 @@ export class FeedbackViewerModalManager {
 	 * Opens the modal.
 	 * @returns Promise which gets resolved as soon as the modal is shown.
 	 */
-	public async openModal(language: string = undefined, translation: FeedbackViewerTranslation = undefined): Promise<void> {
+	public async openModal(
+		language: string = undefined,
+		translation: FeedbackViewerTranslation = undefined,
+		categories: string[] = undefined): Promise<void> {
+
 		const methodName = "openModal";
 		this.logger.entry(methodName);
 
 		// take screenshot
-
 		let screenshot: any;
 		try {
 			screenshot = (await Screenshot.URI()).URI;
+			this.logger.debug(methodName, screenshot);
 		} catch (e) {
 			// TODO: add errorhandling
+			this.logger.error(methodName, "could not take screenshot", e);
 			screenshot = undefined;
 		}
 
 		const modal = this.modalController.create(FeedbackViewerModalComponent, {
 			screenshot: screenshot,
 			language: language,
-			translation: translation
+			translation: translation,
+			categories: categories
 		});
 		modal.onDidDismiss(() => {
 			this.onModalClosed();

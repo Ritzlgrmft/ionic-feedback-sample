@@ -32,7 +32,14 @@ export class HomePage {
 
 		this.languages = ["en", "de", "custom"];
 		this.selectedLanguage = "en";
-		this.translation = { title: "myTitle", cancel: "myCancel" };
+		this.translation = {
+			title: "myTitle",
+			cancel: "myCancel",
+			send: "mySend",
+			message: "myMessage",
+			email: "myEmail",
+			includeScreenshot: "myIncludeScreenshot"
+		};
 	}
 
 	public ionViewDidEnter(): void {

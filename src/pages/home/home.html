@@ -26,16 +26,37 @@
 			</ion-item>
 		</ion-list>
 
-		<ion-item *ngIf="selectedLanguage === 'custom'">
-			<ion-label fixed>title</ion-label>
-			<ion-input type="text" [(ngModel)]="translation.title"></ion-input>
-		</ion-item>
+		<div *ngIf="selectedLanguage === 'custom'">
+			<ion-item>
+				<ion-label fixed>title</ion-label>
+				<ion-input type="text" [(ngModel)]="translation.title"></ion-input>
+			</ion-item>
 
-		<ion-item *ngIf="selectedLanguage === 'custom'">
-			<ion-label fixed>cancel</ion-label>
-			<ion-input type="text" [(ngModel)]="translation.cancel"></ion-input>
-		</ion-item>
+			<ion-item>
+				<ion-label fixed>cancel</ion-label>
+				<ion-input type="text" [(ngModel)]="translation.cancel"></ion-input>
+			</ion-item>
 
+			<ion-item>
+				<ion-label fixed>send</ion-label>
+				<ion-input type="text" [(ngModel)]="translation.send"></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label fixed>message</ion-label>
+				<ion-input type="text" [(ngModel)]="translation.message"></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label fixed>email</ion-label>
+				<ion-input type="text" [(ngModel)]="translation.email"></ion-input>
+			</ion-item>
+
+			<ion-item>
+				<ion-label fixed>includeScreenshot</ion-label>
+				<ion-input type="text" [(ngModel)]="translation.includeScreenshot"></ion-input>
+			</ion-item>
+		</div>
 
 	</ion-card>
 

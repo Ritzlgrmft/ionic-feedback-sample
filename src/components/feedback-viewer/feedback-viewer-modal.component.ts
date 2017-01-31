@@ -15,6 +15,7 @@ import { FeedbackViewerTranslation } from "./feedback-viewer-translation.model";
 })
 export class FeedbackViewerModalComponent implements OnInit {
 
+	public showCategories: boolean;
 	public category: string;
 	public categories: string[];
 	public message: string;
@@ -50,11 +51,18 @@ export class FeedbackViewerModalComponent implements OnInit {
 		const methodName = "ctor";
 		this.logger.entry(methodName);
 
-		this.categories = ["Cat A", "Cat B", "Cat C"];
-		this.category = this.categories[0];
+		this.categories = navParams.get("categories");
+		if (Array.isArray(this.categories) && this.categories.length > 0) {
+			this.showCategories = true;
+			this.category = this.categories[0];
+		} else {
+			this.showCategories = false;
+		}
+
 		this.includeScreenshot = true;
 		this.screenshot = navParams.get("screenshot");
 		this.showScreenshot = (typeof this.screenshot === "string");
+
 		this.language = navParams.get("language");
 		this.translation = navParams.get("translation");
 
@@ -70,13 +78,21 @@ export class FeedbackViewerModalComponent implements OnInit {
 		this.translations = {};
 		// tslint:disable-next-line:no-string-literal
 		this.translations["en"] = {
-			"title": "Feedback",
-			"cancel": "Cancel"
+			title: "Feedback",
+			cancel: "Cancel",
+			send: "Send",
+			message: "Message",
+			email: "Email",
+			includeScreenshot: "Include Screenshot"
 		};
 		// tslint:disable-next-line:no-string-literal
 		this.translations["de"] = {
-			"title": "Feedback",
-			"cancel": "Abbrechen"
+			title: "Feedback",
+			cancel: "Abbrechen",
+			send: "Senden",
+			message: "Nachricht",
+			email: "Email",
+			includeScreenshot: "Screenshot einschließen"
 		};
 	}
 
