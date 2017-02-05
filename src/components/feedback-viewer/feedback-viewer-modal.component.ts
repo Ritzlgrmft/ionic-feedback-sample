@@ -63,6 +63,7 @@ export class FeedbackViewerModalComponent implements OnInit {
 		this.screenshot = navParams.get("screenshot");
 		this.showScreenshot = (typeof this.screenshot === "string");
 
+		this.email = navParams.get("email");
 		this.language = navParams.get("language");
 		this.translation = navParams.get("translation");
 

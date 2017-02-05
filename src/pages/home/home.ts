@@ -30,6 +30,8 @@ export class HomePage {
 
 	public categories: string[];
 
+	public email: string;
+
 	public attachScreenshot: boolean;
 
 	private loggerName = "Ionic.Feedback.Sample.HomePage";
@@ -49,6 +51,7 @@ export class HomePage {
 			includeScreenshot: "myIncludeScreenshot"
 		};
 		this.categories = ["Issue", "Suggestion"];
+		this.email = "somebody@somewhere.com";
 		this.attachScreenshot = true;
 	}
 
@@ -64,6 +67,7 @@ export class HomePage {
 			this.selectedLanguage === "custom" ? undefined : this.selectedLanguage,
 			this.selectedLanguage === "custom" ? this.translation : undefined,
 			this.categories,
+			this.email,
 			this.attachScreenshot);
 	}
 

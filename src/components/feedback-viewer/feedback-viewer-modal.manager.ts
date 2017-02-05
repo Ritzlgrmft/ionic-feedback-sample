@@ -38,7 +38,8 @@ export class FeedbackViewerModalManager {
 	 * @param language language used for the modal. Currently the languages en and de are supported.
 	 *                 If the given language is unknown or undefined, the given translation is used.
 	 * @param translation translation for the labels in the modal.
-	 * @param categories optional categories of the feedback
+	 * @param categories optional categories of the feedback.
+	 * @param email email address
 	 * @param attachScreenshot if true, a shot of the current screen will be attached by default
 	 * @returns Promise which gets resolved as soon as the modal is shown.
 	 */
@@ -46,10 +47,11 @@ export class FeedbackViewerModalManager {
 		language: string,
 		translation: FeedbackViewerTranslation,
 		categories: string[],
+		email: string,
 		attachScreenshot: boolean): Promise<void> {
 
 		const methodName = "openModal";
-		this.logger.entry(methodName, language, typeof translation === "object" ? "object" : undefined, categories, attachScreenshot);
+		this.logger.entry(methodName, language, typeof translation === "object" ? "object" : undefined, categories, email, attachScreenshot);
 
 		// take screenshot
 		let screenshot: string = undefined;
@@ -71,7 +73,8 @@ export class FeedbackViewerModalManager {
 			screenshot: screenshot,
 			language: language,
 			translation: translation,
-			categories: categories
+			categories: categories,
+			email: email
 		});
 		modal.onDidDismiss(() => {
 			this.onModalClosed();
