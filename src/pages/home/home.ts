@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
-import { NavController } from "ionic-angular";
+import { ItemSliding, NavController, reorderArray } from "ionic-angular";
+import { ReorderIndexes } from "ionic-angular/components/item/item-reorder";
 
 import { FeedbackViewerModalManager, FeedbackViewerTranslation } from "../../components/feedback-viewer";
 
@@ -7,6 +8,7 @@ import { FeedbackViewerModalManager, FeedbackViewerTranslation } from "../../com
  * Home page.
  */
 @Component({
+	selector: "page-home",
 	templateUrl: "home.html"
 })
 export class HomePage {
@@ -26,6 +28,12 @@ export class HomePage {
 	 */
 	public translation: FeedbackViewerTranslation;
 
+	public categories: string[];
+
+	public attachScreenshot: boolean;
+
+	private loggerName = "Ionic.Feedback.Sample.HomePage";
+
 	constructor(
 		private navController: NavController,
 		private feedbackViewerModalManager: FeedbackViewerModalManager) {
@@ -40,21 +48,23 @@ export class HomePage {
 			email: "myEmail",
 			includeScreenshot: "myIncludeScreenshot"
 		};
+		this.categories = ["Issue", "Suggestion"];
+		this.attachScreenshot = true;
 	}
 
 	public ionViewDidEnter(): void {
-		this.openModal();
+		// this.openModal();
 	}
 
 	/**
 	 * Open feedback modal.
 	 */
 	public openModal(): void {
-		if (this.selectedLanguage === "custom") {
-			this.feedbackViewerModalManager.openModal(undefined, this.translation);
-		} else {
-			this.feedbackViewerModalManager.openModal(this.selectedLanguage);
-		}
+		this.feedbackViewerModalManager.openModal(
+			this.selectedLanguage === "custom" ? undefined : this.selectedLanguage,
+			this.selectedLanguage === "custom" ? this.translation : undefined,
+			this.categories,
+			this.attachScreenshot);
 	}
 
 	/**
@@ -62,5 +72,22 @@ export class HomePage {
 	 */
 	public changeLanguage(language: string): void {
 		this.selectedLanguage = language;
+	}
+
+	public reorderCategories(indexes: ReorderIndexes): void {
+		this.categories = reorderArray(this.categories, indexes);
+	}
+
+	public deleteCategory(categoryToDelete: ItemSliding): void {
+		for (let i = 0; i < this.categories.length; i++) {
+			if (this.categories[i] === categoryToDelete.toString()) {
+				this.categories.splice(i, 1);
+				break;
+			}
+		}
+	}
+
+	public addCategory(): void {
+		this.categories.push(`Category ${this.categories.length + 1}`);
 	}
 }

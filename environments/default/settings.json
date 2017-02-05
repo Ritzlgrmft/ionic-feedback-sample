@@ -1,0 +1,10 @@
+{
+	"logging": {
+		"logLevels": [
+			{
+				"loggerName": "root",
+				"logLevel": "DEBUG"
+			}
+		]
+	}
+}

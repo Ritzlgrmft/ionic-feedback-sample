@@ -22,7 +22,7 @@ export class FeedbackViewerModalComponent implements OnInit {
 	public email: string;
 	public showScreenshot: boolean;
 	public includeScreenshot: boolean;
-	public screenshot: any;
+	public screenshot: string;
 
 	/**
 	 * Language to be used for the modal.

@@ -24,3 +24,6 @@ cd ionic-feedback-sample
 npm install
 ionic serve
 ```
+
+## Todos
+

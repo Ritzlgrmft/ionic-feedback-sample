@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from "@angular/core";
-import { ModalController } from "ionic-angular";
+import { ModalController, Platform } from "ionic-angular";
 import { Screenshot } from "ionic-native";
 
 import { FeedbackViewerModalComponent } from "./feedback-viewer-modal.component";
@@ -14,6 +14,7 @@ import { Logger, LoggingService } from "ionic-logging-service";
 export class FeedbackViewerModalManager {
 
 	constructor(
+		private platform: Platform,
 		private modalController: ModalController,
 		loggingService: LoggingService) {
 
@@ -34,25 +35,36 @@ export class FeedbackViewerModalManager {
 
 	/**
 	 * Opens the modal.
+	 * @param language language used for the modal. Currently the languages en and de are supported.
+	 *                 If the given language is unknown or undefined, the given translation is used.
+	 * @param translation translation for the labels in the modal.
+	 * @param categories optional categories of the feedback
+	 * @param attachScreenshot if true, a shot of the current screen will be attached by default
 	 * @returns Promise which gets resolved as soon as the modal is shown.
 	 */
 	public async openModal(
-		language: string = undefined,
-		translation: FeedbackViewerTranslation = undefined,
-		categories: string[] = undefined): Promise<void> {
+		language: string,
+		translation: FeedbackViewerTranslation,
+		categories: string[],
+		attachScreenshot: boolean): Promise<void> {
 
 		const methodName = "openModal";
-		this.logger.entry(methodName);
+		this.logger.entry(methodName, language, typeof translation === "object" ? "object" : undefined, categories, attachScreenshot);
 
 		// take screenshot
-		let screenshot: any;
-		try {
-			screenshot = (await Screenshot.URI()).URI;
-			this.logger.debug(methodName, screenshot);
-		} catch (e) {
-			// TODO: add errorhandling
-			this.logger.error(methodName, "could not take screenshot", e);
-			screenshot = undefined;
+		let screenshot: string = undefined;
+		if (attachScreenshot) {
+			try {
+				if (await this.platform.ready() === "cordova") {
+					screenshot = (await Screenshot.URI()).URI;
+					this.logger.debug(methodName, screenshot);
+				} else {
+					this.logger.debug(methodName, "no screenshot taken since not running on device");
+				}
+			} catch (e) {
+				// TODO: add errorhandling
+				this.logger.error(methodName, "could not take screenshot", e);
+			}
 		}
 
 		const modal = this.modalController.create(FeedbackViewerModalComponent, {
