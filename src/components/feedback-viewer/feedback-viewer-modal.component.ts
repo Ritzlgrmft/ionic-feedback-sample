@@ -23,6 +23,9 @@ export class FeedbackViewerModalComponent implements OnInit {
 	public showScreenshot: boolean;
 	public includeScreenshot: boolean;
 	public screenshot: string;
+	public get sendDisabled(): boolean {
+		return typeof this.message === "undefined" || this.message.length === 0;
+	}
 
 	/**
 	 * Language to be used for the modal.
