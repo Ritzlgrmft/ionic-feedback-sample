@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { ModalController, Platform } from "ionic-angular";
-import { Screenshot } from "ionic-native";
+import { Screenshot } from "@ionic-native/screenshot";
 
 import { FeedbackViewerModalComponent } from "./feedback-viewer-modal.component";
 import { FeedbackViewerTranslation } from "./feedback-viewer-translation.model";
