@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { NavParams, Platform, ViewController } from "ionic-angular";
+import { Headers, Http } from "@angular/http";
+import { AlertController, NavParams, Platform, ViewController } from "ionic-angular";
 import { Device } from "ionic-native";
 
 import { Logger, LoggingService, LogMessage } from "ionic-logging-service";
@@ -62,6 +63,8 @@ export class FeedbackViewerModalComponent implements OnInit {
 		private viewController: ViewController,
 		navParams: NavParams,
 		platform: Platform,
+		private alertController: AlertController,
+		private http: Http,
 		loggingService: LoggingService) {
 
 		this.logger = loggingService.getLogger("Ionic.Feedback.Viewer.Modal.Component");
@@ -158,11 +161,33 @@ export class FeedbackViewerModalComponent implements OnInit {
 		this.logger.exit(methodName);
 	}
 
-	public onSend(): void {
+	public async onSend(): Promise<void> {
 		const methodName = "onSend";
 		this.logger.entry(methodName);
 
-		this.viewController.dismiss();
+		const url = "http://localhost:5000/api/Feedback";
+		const headers = new Headers();
+		headers.append("Accept", "application/json");
+		headers.append("Authorization", "Basic " + btoa("94f4e317-a8ef-4ece-92ff-9e0d9398b5eb" + ":" + "307726c0-f677-4918-beb5-01ca6fce80ea"));
+		headers.append("Content-Type", "application/json");
+		const body = {
+			timestamp: "2017-02-11T12:26:35.323Z",
+			category: "Kategorie",
+			message: "Eine ganz wichtige Nachricht",
+			email: "ooo@aaa.dd"
+		};
+
+		const response = await this.http.post(url, JSON.stringify(body), { headers: headers, withCredentials: true }).toPromise();
+		if (response.status >= 200 && response.status < 300) {
+			this.viewController.dismiss();
+		} else {
+			const alert = this.alertController.create({
+				title: "Feedback",
+				subTitle: "Could not send feedback",
+				buttons: ["OK"]
+			});
+			await alert.present();
+		}
 
 		this.logger.exit(methodName);
 	}

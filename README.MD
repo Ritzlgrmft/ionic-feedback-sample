@@ -27,3 +27,6 @@ ionic serve
 
 ## Todos
 
+- translate feedback alert
+- configure feedback url
+- show spinner during send
