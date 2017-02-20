@@ -17,8 +17,8 @@
 	</ion-toolbar>
 </ion-header>
 <ion-content>
-	<ion-list>
 
+	<ion-list>
 		<ion-item *ngIf="showCategories">
 			<ion-select [(ngModel)]="category">
 				<ion-option *ngFor="let c of categories" [value]="c">{{c}}</ion-option>
@@ -30,18 +30,114 @@
 		</ion-item>
 
 		<ion-item>
+			<ion-input type="text" placeholder="{{ getTranslation().name }}" [(ngModel)]="name"></ion-input>
+		</ion-item>
+		<ion-item>
 			<ion-input type="email" placeholder="{{ getTranslation().email }}" [(ngModel)]="email"></ion-input>
 		</ion-item>
-
-		<ion-item *ngIf="showScreenshot">
-			<ion-label>{{ getTranslation().includeScreenshot }}</ion-label>
-			<ion-checkbox [(ngModel)]="includeScreenshot"></ion-checkbox>
-		</ion-item>
-
-		<ion-item *ngIf="showScreenshot && includeScreenshot">
-			<img class="screenshot" [src]="screenshot" />
-		</ion-item>
-
 	</ion-list>
+
+	<ion-card *ngIf="showScreenshot">
+		<ion-card-header>
+			<ion-item *ngIf="showScreenshot">
+				<ion-label>{{ getTranslation().includeScreenshot }}</ion-label>
+				<ion-checkbox [(ngModel)]="includeScreenshot"></ion-checkbox>
+			</ion-item>
+		</ion-card-header>
+		<ion-list *ngIf="includeScreenshot">
+			<ion-item>
+				<img class="screenshot" [src]="screenshot" />
+			</ion-item>
+		</ion-list>
+	</ion-card>
+
+	<ion-card *ngIf="showDeviceInfo">
+		<ion-card-header>
+			<ion-item>
+				<ion-label>{{ getTranslation().includeDeviceInfo }}</ion-label>
+				<ion-checkbox [(ngModel)]="includeDeviceInfo"></ion-checkbox>
+			</ion-item>
+		</ion-card-header>
+		<ion-list *ngIf="includeDeviceInfo">
+			<ion-item>
+				<div item-left>Manufacturer</div>
+				<div item-right text-right>{{deviceInfo.manufacturer}}</div>
+			</ion-item>
+			<ion-item>
+				<div item-left>Model</div>
+				<div item-right text-right>{{deviceInfo.model}}</div>
+			</ion-item>
+			<ion-item>
+				<div item-left>UUID</div>
+				<div item-right text-right>{{deviceInfo.uuid}}</div>
+			</ion-item>
+			<ion-item>
+				<div item-left>Serial</div>
+				<div item-right text-right>{{deviceInfo.serial}}</div>
+			</ion-item>
+			<ion-item>
+				<div item-left>Platform</div>
+				<div item-right text-right>{{deviceInfo.platform}}</div>
+			</ion-item>
+			<ion-item>
+				<div item-left>Version</div>
+				<div item-right text-right>{{deviceInfo.version}}</div>
+			</ion-item>
+			<ion-item>
+				<div item-left>Cordova</div>
+				<div item-right text-right>{{deviceInfo.cordova}}</div>
+			</ion-item>
+			<ion-item>
+				<div item-left>IsVirtual</div>
+				<div item-right text-right>{{deviceInfo.isVirtual}}</div>
+			</ion-item>
+		</ion-list>
+	</ion-card>
+
+	<ion-card *ngIf="showAppInfo">
+		<ion-card-header>
+			<ion-item>
+				<ion-label>{{ getTranslation().includeAppInfo }}</ion-label>
+				<ion-checkbox [(ngModel)]="includeAppInfo"></ion-checkbox>
+			</ion-item>
+		</ion-card-header>
+		<ion-list *ngIf="includeAppInfo">
+			<ion-item>
+				<div item-left>AppName</div>
+				<div item-right text-right>{{appInfo.appName}}</div>
+			</ion-item>
+			<ion-item>
+				<div item-left>PackageName</div>
+				<div item-right text-right>{{appInfo.packageName}}</div>
+			</ion-item>
+			<ion-item>
+				<div item-left>VersionCode</div>
+				<div item-right text-right>{{appInfo.versionCode}}</div>
+			</ion-item>
+			<ion-item>
+				<div item-left>VersionNumber</div>
+				<div item-right text-right>{{appInfo.versionNumber}}</div>
+			</ion-item>
+		</ion-list>
+	</ion-card>
+
+	<ion-card *ngIf="showLogMessages">
+		<ion-card-header>
+			<ion-item>
+				<ion-label>{{ getTranslation().includeLogMessages }}</ion-label>
+				<ion-checkbox [(ngModel)]="includeLogMessages"></ion-checkbox>
+			</ion-item>
+		</ion-card-header>
+		<ion-list *ngIf="includeLogMessages">
+			<ion-item *ngFor="let logMessage of logMessages">
+				<p>{{logMessage.timeStamp | date: 'dd.MM.yyyy HH:mm:ss'}} {{logMessage.level}}</p>
+				<p>{{logMessage.logger}}</p>
+				<p>
+					{{logMessage.methodName}}
+					<span *ngFor="let messagePart of logMessage.message">{{messagePart}} </span>
+				</p>
+			</ion-item>
+		</ion-list>
+	</ion-card>
 
 </ion-content>

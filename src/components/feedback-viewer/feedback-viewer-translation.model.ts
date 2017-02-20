@@ -25,6 +25,11 @@ export interface FeedbackViewerTranslation {
 	message: string;
 
 	/**
+	 * Name placeholder.
+	 */
+	name: string;
+
+	/**
 	 * Email placeholder.
 	 */
 	email: string;
@@ -33,4 +38,19 @@ export interface FeedbackViewerTranslation {
 	 * Include screenshot label.
 	 */
 	includeScreenshot: string;
+
+	/**
+	 * Include device info label.
+	 */
+	includeDeviceInfo: string;
+
+	/**
+	 * Include app info label.
+	 */
+	includeAppInfo: string;
+
+	/**
+	 * Include log label.
+	 */
+	includeLogMessages: string;
 }

@@ -30,9 +30,13 @@ export class HomePage {
 
 	public categories: string[];
 
+	public name: string;
 	public email: string;
 
 	public attachScreenshot: boolean;
+	public attachDeviceInfo: boolean;
+	public attachAppInfo: boolean;
+	public attachLogMessages: boolean;
 
 	private loggerName = "Ionic.Feedback.Sample.HomePage";
 
@@ -47,16 +51,20 @@ export class HomePage {
 			cancel: "myCancel",
 			send: "mySend",
 			message: "myMessage",
+			name: "myName",
 			email: "myEmail",
-			includeScreenshot: "myIncludeScreenshot"
+			includeScreenshot: "myIncludeScreenshot",
+			includeDeviceInfo: "myIncludeDeviceInfo",
+			includeAppInfo: "myIncludeAppInfo",
+			includeLogMessages: "myIncludeLogMessages"
 		};
 		this.categories = ["Issue", "Suggestion"];
+		this.name = "It's me";
 		this.email = "somebody@somewhere.com";
 		this.attachScreenshot = true;
-	}
-
-	public ionViewDidEnter(): void {
-		// this.openModal();
+		this.attachDeviceInfo = true;
+		this.attachAppInfo = true;
+		this.attachLogMessages = true;
 	}
 
 	/**
@@ -67,8 +75,12 @@ export class HomePage {
 			this.selectedLanguage === "custom" ? undefined : this.selectedLanguage,
 			this.selectedLanguage === "custom" ? this.translation : undefined,
 			this.categories,
+			this.name,
 			this.email,
-			this.attachScreenshot);
+			this.attachScreenshot,
+			this.attachDeviceInfo,
+			this.attachAppInfo,
+			this.attachLogMessages);
 	}
 
 	/**

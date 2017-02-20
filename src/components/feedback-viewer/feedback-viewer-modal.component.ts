@@ -1,8 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { NavParams, ViewController } from "ionic-angular";
+import { NavParams, Platform, ViewController } from "ionic-angular";
+import { Device } from "ionic-native";
 
-import { Logger, LoggingService } from "ionic-logging-service";
+import { Logger, LoggingService, LogMessage } from "ionic-logging-service";
 
+import { AppInfo } from "./app-info.model";
 import { FeedbackViewerTranslation } from "./feedback-viewer-translation.model";
 
 /**
@@ -19,10 +21,21 @@ export class FeedbackViewerModalComponent implements OnInit {
 	public category: string;
 	public categories: string[];
 	public message: string;
+	public name: string;
 	public email: string;
 	public showScreenshot: boolean;
 	public includeScreenshot: boolean;
 	public screenshot: string;
+	public showDeviceInfo: boolean;
+	public includeDeviceInfo: boolean;
+	public deviceInfo: Device;
+	public showAppInfo: boolean;
+	public includeAppInfo: boolean;
+	public appInfo: AppInfo;
+	public showLogMessages: boolean;
+	public includeLogMessages: boolean;
+	public logMessages: LogMessage[];
+
 	public get sendDisabled(): boolean {
 		return typeof this.message === "undefined" || this.message.length === 0;
 	}
@@ -48,6 +61,7 @@ export class FeedbackViewerModalComponent implements OnInit {
 	constructor(
 		private viewController: ViewController,
 		navParams: NavParams,
+		platform: Platform,
 		loggingService: LoggingService) {
 
 		this.logger = loggingService.getLogger("Ionic.Feedback.Viewer.Modal.Component");
@@ -64,9 +78,23 @@ export class FeedbackViewerModalComponent implements OnInit {
 
 		this.includeScreenshot = true;
 		this.screenshot = navParams.get("screenshot");
-		this.showScreenshot = (typeof this.screenshot === "string");
+		this.showScreenshot = (typeof this.screenshot !== "undefined");
 
+		this.includeDeviceInfo = true;
+		this.deviceInfo = navParams.get("deviceInfo");
+		this.showDeviceInfo = (typeof this.deviceInfo !== "undefined");
+
+		this.includeAppInfo = true;
+		this.appInfo = navParams.get("appInfo");
+		this.showAppInfo = (typeof this.appInfo !== "undefined");
+
+		this.includeLogMessages = true;
+		this.logMessages = navParams.get("logMessages");
+		this.showLogMessages = (typeof this.logMessages !== "undefined");
+
+		this.name = navParams.get("name");
 		this.email = navParams.get("email");
+
 		this.language = navParams.get("language");
 		this.translation = navParams.get("translation");
 
@@ -86,8 +114,12 @@ export class FeedbackViewerModalComponent implements OnInit {
 			cancel: "Cancel",
 			send: "Send",
 			message: "Message",
+			name: "Name",
 			email: "Email",
-			includeScreenshot: "Include Screenshot"
+			includeScreenshot: "Include Screenshot",
+			includeDeviceInfo: "Include Device Info",
+			includeAppInfo: "Include App Info",
+			includeLogMessages: "Include Log"
 		};
 		// tslint:disable-next-line:no-string-literal
 		this.translations["de"] = {
@@ -95,8 +127,12 @@ export class FeedbackViewerModalComponent implements OnInit {
 			cancel: "Abbrechen",
 			send: "Senden",
 			message: "Nachricht",
+			name: "Name",
 			email: "Email",
-			includeScreenshot: "Screenshot einschließen"
+			includeScreenshot: "Screenshot einschließen",
+			includeDeviceInfo: "Geräte Info einschließen",
+			includeAppInfo: "App Info einschließen",
+			includeLogMessages: "Log einschließen"
 		};
 	}
 

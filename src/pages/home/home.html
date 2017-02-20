@@ -74,17 +74,43 @@
 	<ion-card>
 		<ion-card-header>
 			<ion-item>
-				Further Options
+				Contact
 			</ion-item>
 		</ion-card-header>
 		<ion-list>
 			<ion-item>
-				<ion-label fixed>Email</ion-label>
-				<ion-input type="text" [(ngModel)]="email"></ion-input>
+				<ion-label fixed>Name</ion-label>
+				<ion-input type="text" [(ngModel)]="name"></ion-input>
 			</ion-item>
+			<ion-item>
+				<ion-label fixed>Email</ion-label>
+				<ion-input type="email" [(ngModel)]="email"></ion-input>
+			</ion-item>
+		</ion-list>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header>
+			<ion-item>
+				Options
+			</ion-item>
+		</ion-card-header>
+		<ion-list>
 			<ion-item>
 				<ion-label>Attach Screenshot</ion-label>
 				<ion-toggle [(ngModel)]="attachScreenshot"></ion-toggle>
+			</ion-item>
+			<ion-item>
+				<ion-label>Attach Device Info</ion-label>
+				<ion-toggle [(ngModel)]="attachDeviceInfo"></ion-toggle>
+			</ion-item>
+			<ion-item>
+				<ion-label>Attach App Info</ion-label>
+				<ion-toggle [(ngModel)]="attachAppInfo"></ion-toggle>
+			</ion-item>
+			<ion-item>
+				<ion-label>Attach Log Messages</ion-label>
+				<ion-toggle [(ngModel)]="attachLogMessages"></ion-toggle>
 			</ion-item>
 		</ion-list>
 	</ion-card>
