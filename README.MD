@@ -28,5 +28,4 @@ ionic serve
 ## Todos
 
 - translate feedback alert
-- simulator: send cors problem
 - implement error handler
