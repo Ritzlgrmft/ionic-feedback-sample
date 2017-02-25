@@ -4,7 +4,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from "ionic-angular";
 import { ConfigurationService } from "ionic-configuration-service";
 import { LoggingService } from "ionic-logging-service";
 import { AppComponent } from "./app.component";
-import { FeedbackViewerModalComponent, FeedbackViewerModalManager } from "../components/feedback-viewer/";
+import { FeedbackModule } from "../components/feedback";
 import { HomePage } from "../pages/home/home";
 
 /**
@@ -21,18 +21,16 @@ export function loadConfiguration(configurationService: ConfigurationService): (
 @NgModule({
 	declarations: [
 		AppComponent,
-		FeedbackViewerModalComponent,
 		HomePage
 	],
 	imports: [
 		IonicModule.forRoot(AppComponent),
-		HttpModule
-		// FeedbackViewerModule
+		HttpModule,
+		FeedbackModule
 	],
 	bootstrap: [IonicApp],
 	entryComponents: [
 		AppComponent,
-		FeedbackViewerModalComponent,
 		HomePage
 	],
 	providers: [
@@ -44,8 +42,7 @@ export function loadConfiguration(configurationService: ConfigurationService): (
 			deps: [ConfigurationService],
 			multi: true
 		},
-		LoggingService,
-		FeedbackViewerModalManager
+		LoggingService
 	]
 })
 export class AppModule { }

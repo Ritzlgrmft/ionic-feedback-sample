@@ -4,7 +4,7 @@ import { AppVersion } from "ionic-native";
 import { Device } from "ionic-native";
 import { Screenshot } from "ionic-native";
 
-import { AppInfo } from "./app-info.model";
+import { AppInfo } from "../shared/app-info.model";
 import { FeedbackViewerModalComponent } from "./feedback-viewer-modal.component";
 import { FeedbackViewerTranslation } from "./feedback-viewer-translation.model";
 

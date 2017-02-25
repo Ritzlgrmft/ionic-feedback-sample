@@ -6,5 +6,8 @@
 				"logLevel": "DEBUG"
 			}
 		]
+	},
+	"feedback": {
+		"url": "http://localhost:5000/api/Feedback"
 	}
 }

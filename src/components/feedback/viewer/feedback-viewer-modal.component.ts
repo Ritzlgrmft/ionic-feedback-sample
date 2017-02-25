@@ -6,7 +6,8 @@ import * as moment from "moment";
 
 import { Logger, LoggingService, LogMessage } from "ionic-logging-service";
 
-import { AppInfo } from "./app-info.model";
+import { AppInfo } from "../shared/app-info.model";
+import { FeedbackService } from "../service/feedback.service";
 import { FeedbackViewerTranslation } from "./feedback-viewer-translation.model";
 
 /**
@@ -67,7 +68,8 @@ export class FeedbackViewerModalComponent implements OnInit {
 		platform: Platform,
 		private alertController: AlertController,
 		private http: Http,
-		loggingService: LoggingService) {
+		loggingService: LoggingService,
+		private feedbackService: FeedbackService) {
 
 		this.logger = loggingService.getLogger("Ionic.Feedback.Viewer.Modal.Component");
 		const methodName = "ctor";
@@ -168,25 +170,18 @@ export class FeedbackViewerModalComponent implements OnInit {
 		const methodName = "onSend";
 		this.logger.entry(methodName);
 
-		const url = "http://localhost:5000/api/Feedback";
-		const headers = new Headers();
-		headers.append("Accept", "application/json");
-		headers.append("Authorization", "Basic " + btoa("94f4e317-a8ef-4ece-92ff-9e0d9398b5eb" + ":" + "307726c0-f677-4918-beb5-01ca6fce80ea"));
-		headers.append("Content-Type", "application/json");
-		const body = {
-			timestamp: this.timestamp,
-			category: this.category,
-			message: this.message,
-			name: this.name,
-			email: this.email,
-			screenshot: this.showScreenshot && this.includeScreenshot ? this.screenshot : undefined,
-			deviceInfo: this.showDeviceInfo && this.includeDeviceInfo ? this.deviceInfo : undefined,
-			appInfo: this.showAppInfo && this.includeAppInfo ? this.appInfo : undefined,
-			logMessages: this.showLogMessages && this.includeLogMessages ? this.logMessages : undefined
-		};
-
 		try {
-			await this.http.post(url, JSON.stringify(body), { headers: headers, withCredentials: true }).toPromise();
+			await this.feedbackService.sendFeedback(
+				this.timestamp,
+				this.category,
+				this.message,
+				this.name,
+				this.email,
+				this.showScreenshot && this.includeScreenshot ? this.screenshot : undefined,
+				this.showDeviceInfo && this.includeDeviceInfo ? this.deviceInfo : undefined,
+				this.showAppInfo && this.includeAppInfo ? this.appInfo : undefined,
+				this.showLogMessages && this.includeLogMessages ? this.logMessages : undefined
+			);
 			this.viewController.dismiss();
 		} catch (e) {
 			const alert = this.alertController.create({
