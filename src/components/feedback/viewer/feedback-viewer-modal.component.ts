@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Headers, Http } from "@angular/http";
-import { AlertController, NavParams, Platform, ViewController } from "ionic-angular";
+import { AlertController, Loading, LoadingController, NavParams, Platform, ViewController } from "ionic-angular";
 import { Device } from "ionic-native";
 import * as moment from "moment";
 
@@ -67,6 +67,7 @@ export class FeedbackViewerModalComponent implements OnInit {
 		navParams: NavParams,
 		platform: Platform,
 		private alertController: AlertController,
+		private loadingController: LoadingController,
 		private http: Http,
 		loggingService: LoggingService,
 		private feedbackService: FeedbackService) {
@@ -170,7 +171,11 @@ export class FeedbackViewerModalComponent implements OnInit {
 		const methodName = "onSend";
 		this.logger.entry(methodName);
 
+		let loading: Loading;
 		try {
+			loading = this.loadingController.create();
+			loading.present();
+
 			await this.feedbackService.sendFeedback(
 				this.timestamp,
 				this.category,
@@ -182,8 +187,10 @@ export class FeedbackViewerModalComponent implements OnInit {
 				this.showAppInfo && this.includeAppInfo ? this.appInfo : undefined,
 				this.showLogMessages && this.includeLogMessages ? this.logMessages : undefined
 			);
+			await loading.dismiss();
 			this.viewController.dismiss();
 		} catch (e) {
+			await loading.dismiss();
 			const alert = this.alertController.create({
 				title: "Feedback",
 				subTitle: "Could not send feedback",
