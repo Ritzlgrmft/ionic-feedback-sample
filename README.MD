@@ -30,3 +30,4 @@ ionic serve
 - translate feedback alert
 - configure feedback url
 - show spinner during send
+- simulator: send cors problem

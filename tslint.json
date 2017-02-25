@@ -71,7 +71,7 @@
 		"no-empty-interface": true,
 		"no-eval": true,
 		"no-internal-module": false,
-		"no-magic-numbers": true,
+		// "no-magic-numbers": true,
 		"no-null-keyword": true,
 		"no-parameter-properties": false,
 		"no-require-imports": true,

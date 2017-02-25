@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Headers, Http } from "@angular/http";
 import { AlertController, NavParams, Platform, ViewController } from "ionic-angular";
 import { Device } from "ionic-native";
+import * as moment from "moment";
 
 import { Logger, LoggingService, LogMessage } from "ionic-logging-service";
 
@@ -18,6 +19,7 @@ import { FeedbackViewerTranslation } from "./feedback-viewer-translation.model";
 })
 export class FeedbackViewerModalComponent implements OnInit {
 
+	public timestamp: string;
 	public showCategories: boolean;
 	public category: string;
 	public categories: string[];
@@ -95,6 +97,7 @@ export class FeedbackViewerModalComponent implements OnInit {
 		this.logMessages = navParams.get("logMessages");
 		this.showLogMessages = (typeof this.logMessages !== "undefined");
 
+		this.timestamp = moment().toISOString();
 		this.name = navParams.get("name");
 		this.email = navParams.get("email");
 
@@ -171,16 +174,21 @@ export class FeedbackViewerModalComponent implements OnInit {
 		headers.append("Authorization", "Basic " + btoa("94f4e317-a8ef-4ece-92ff-9e0d9398b5eb" + ":" + "307726c0-f677-4918-beb5-01ca6fce80ea"));
 		headers.append("Content-Type", "application/json");
 		const body = {
-			timestamp: "2017-02-11T12:26:35.323Z",
-			category: "Kategorie",
-			message: "Eine ganz wichtige Nachricht",
-			email: "ooo@aaa.dd"
+			timestamp: this.timestamp,
+			category: this.category,
+			message: this.message,
+			name: this.name,
+			email: this.email,
+			screenshot: this.showScreenshot && this.includeScreenshot ? this.screenshot : undefined,
+			deviceInfo: this.showDeviceInfo && this.includeDeviceInfo ? this.deviceInfo : undefined,
+			appInfo: this.showAppInfo && this.includeAppInfo ? this.appInfo : undefined,
+			logMessages: this.showLogMessages && this.includeLogMessages ? this.logMessages : undefined
 		};
 
-		const response = await this.http.post(url, JSON.stringify(body), { headers: headers, withCredentials: true }).toPromise();
-		if (response.status >= 200 && response.status < 300) {
+		try {
+			await this.http.post(url, JSON.stringify(body), { headers: headers, withCredentials: true }).toPromise();
 			this.viewController.dismiss();
-		} else {
+		} catch (e) {
 			const alert = this.alertController.create({
 				title: "Feedback",
 				subTitle: "Could not send feedback",

@@ -39,15 +39,16 @@
 		"@ionic-native/device": "3.1.0-alpha.1",
 		"@ionic-native/screenshot": "3.1.0-alpha.1",
 		"@ionic-native/utils": "3.1.0-alpha.1",
-		"@ionic/storage": "1.1.8",
-		"ionic-angular": "2.0.1",
+		"@ionic/storage": "1.1.9",
+		"ionic-angular": "2.1.0",
 		"ionicons": "3.0.0",
 		"rxjs": "5.0.0-beta.12",
 		"sw-toolbox": "3.5.1",
 		"zone.js": "~0.6.26",
 		"cz-conventional-changelog": "1.2.0",
 		"ionic-configuration-service": "3.1.0",
-		"ionic-logging-service": "1.2.0"
+		"ionic-logging-service": "1.2.0",
+		"moment": "2.17.1"
 	},
 	"devDependencies": {
 		"@ionic/app-scripts": "1.1.3",
