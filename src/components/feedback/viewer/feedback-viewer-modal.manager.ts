@@ -5,9 +5,11 @@ import { Device } from "ionic-native";
 import { Screenshot } from "ionic-native";
 
 import { AppInfo } from "../shared/app-info.model";
+import { FeedbackConfiguration } from "../shared/feedback-configuration.model";
 import { FeedbackViewerModalComponent } from "./feedback-viewer-modal.component";
 import { FeedbackViewerTranslation } from "./feedback-viewer-translation.model";
 
+import { ConfigurationService } from "ionic-configuration-service";
 import { Logger, LoggingService, LogMessage } from "ionic-logging-service";
 
 /**
@@ -16,14 +18,20 @@ import { Logger, LoggingService, LogMessage } from "ionic-logging-service";
 @Injectable()
 export class FeedbackViewerModalManager {
 
+	private configuration: FeedbackConfiguration;
+
 	constructor(
 		private platform: Platform,
 		private modalController: ModalController,
+		configurationService: ConfigurationService,
 		private loggingService: LoggingService) {
 
 		this.logger = loggingService.getLogger("Ionic.Feedback.Viewer.Modal.Manager");
 		const methodName = "ctor";
 		this.logger.entry(methodName);
+
+		this.configuration = configurationService.getValue<FeedbackConfiguration>("feedback");
+		this.modalIsOpen = false;
 
 		this.logger.exit(methodName);
 	}
@@ -35,6 +43,8 @@ export class FeedbackViewerModalManager {
 
 	// tslint:disable-next-line:completed-docs
 	private logger: Logger;
+
+	private modalIsOpen: boolean;
 
 	/**
 	 * Opens the modal.
@@ -51,15 +61,15 @@ export class FeedbackViewerModalManager {
 	 * @returns Promise which gets resolved as soon as the modal is shown.
 	 */
 	public async openModal(
-		language: string,
-		translation: FeedbackViewerTranslation,
-		categories: string[],
-		name: string,
-		email: string,
-		attachScreenshot: boolean,
-		attachDeviceInfo: boolean,
-		attachAppInfo: boolean,
-		attachLogMessages: boolean): Promise<void> {
+		language: string = this.configuration.language,
+		translation: FeedbackViewerTranslation = this.configuration.translation,
+		categories: string[] = this.configuration.categories,
+		name: string = this.configuration.name,
+		email: string = this.configuration.email,
+		attachScreenshot: boolean = this.configuration.attachScreenshot,
+		attachDeviceInfo: boolean = this.configuration.attachDeviceInfo,
+		attachAppInfo: boolean = this.configuration.attachAppInfo,
+		attachLogMessages: boolean = this.configuration.attachLogMessages): Promise<void> {
 
 		// retrieve log messages (as soon as possible)
 		let logMessages: LogMessage[] = undefined;
@@ -72,13 +82,18 @@ export class FeedbackViewerModalManager {
 		this.logger.entry(methodName, language, typeof translation === "object" ? "object" : undefined, categories,
 			name, email, attachScreenshot, attachDeviceInfo, attachAppInfo, attachLogMessages);
 
+		if (this.modalIsOpen) {
+			this.logger.warn(methodName, "modal is already open");
+			throw new Error("FeedbackViewerModalComponent is already open");
+		}
+
 		// take screenshot
 		let screenshot: string = undefined;
 		if (attachScreenshot) {
 			try {
 				if (await this.platform.ready() === "cordova") {
 					screenshot = (await Screenshot.URI()).URI;
-					this.logger.debug(methodName, screenshot);
+					this.logger.debug(methodName, "screenshot taken");
 				} else {
 					this.logger.debug(methodName, "no screenshot taken since not running on device");
 				}
@@ -117,6 +132,7 @@ export class FeedbackViewerModalManager {
 			this.onModalClosed();
 		});
 		await modal.present();
+		this.modalIsOpen = true;
 
 		this.logger.exit(methodName);
 	}
@@ -128,6 +144,7 @@ export class FeedbackViewerModalManager {
 		const methodName = "onModalClosed";
 		this.logger.entry(methodName);
 
+		this.modalIsOpen = false;
 		this.modalClosed.emit();
 
 		this.logger.exit(methodName);

@@ -8,6 +8,16 @@
 		]
 	},
 	"feedback": {
-		"url": "http://localhost:5000/api/Feedback"
+		"isEnabled": true,
+		"url": "http://localhost:5000/api/Feedback",
+		"language": "de",
+		"categories": [
+			"Kat 1",
+			"Kat 2"
+		],
+		"attachScreenshot": true,
+		"attachDeviceInfo": true,
+		"attachAppInfo": true,
+		"attachLogMessages": true
 	}
 }

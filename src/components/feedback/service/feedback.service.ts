@@ -1,22 +1,26 @@
-import { Injectable } from "@angular/core";
+import { EventEmitter, Injectable } from "@angular/core";
 import { Headers, Http } from "@angular/http";
-import { Device } from "ionic-native";
+import { Platform } from "ionic-angular";
+import { Device, Shake } from "ionic-native";
 
 import { ConfigurationService } from "ionic-configuration-service";
 import { Logger, LoggingService, LogMessage } from "ionic-logging-service";
 
 import { AppInfo } from "../shared/app-info.model";
-import { FeedbackConfiguration } from "./feedback-configuration.model";
+import { FeedbackConfiguration } from "../shared/feedback-configuration.model";
+import { FeedbackViewerModalManager } from "../viewer/feedback-viewer-modal.manager";
 
 @Injectable()
 export class FeedbackService {
 
+	public shaken: EventEmitter<void>;
 	private logger: Logger;
 
-	private url: string;
+	private configuration: FeedbackConfiguration;
 
 	constructor(
 		private http: Http,
+		private platform: Platform,
 		private configurationService: ConfigurationService,
 		loggingService: LoggingService) {
 
@@ -25,6 +29,7 @@ export class FeedbackService {
 		this.logger.entry(methodName);
 
 		this.configure();
+		this.shaken = new EventEmitter<void>();
 
 		this.logger.exit(methodName);
 	}
@@ -41,7 +46,37 @@ export class FeedbackService {
 			throw new Error("FeedbackService: configuation missing");
 		}
 
-		this.url = configuration.url;
+		this.configuration = configuration;
+
+		this.logger.exit(methodName);
+	}
+
+	public async startWatchForShake(): Promise<void> {
+		const methodName = "startWatchForShake";
+		this.logger.entry(methodName);
+
+		if (!this.configuration.isEnabled) {
+			this.logger.warn(methodName, "feedback is disabled");
+		} else if (await this.platform.ready() === "cordova" && !Device.isVirtual) {
+			Shake.startWatch().subscribe(() => this.onShaken());
+			this.logger.debug(methodName, "subscribed for shake events");
+		} else {
+			this.logger.warn(methodName, "shaking is not supported");
+		}
+
+		this.logger.exit(methodName);
+	}
+
+	private async onShaken(): Promise<void> {
+		const methodName = "onShaken";
+		this.logger.entry(methodName);
+
+		this.shaken.emit();
+		// const feedbackViewerModalManager: FeedbackViewerModalManager = this.injector.get(FeedbackViewerModalManager);
+		// await feedbackViewerModalManager.openModal(this.configuration.language, this.configuration.translation,
+		// 	this.configuration.categories, this.configuration.name, this.configuration.email,
+		// 	this.configuration.attachScreenshot, this.configuration.attachDeviceInfo,
+		// 	this.configuration.attachAppInfo, this.configuration.attachLogMessages);
 
 		this.logger.exit(methodName);
 	}
@@ -67,9 +102,9 @@ export class FeedbackService {
 		};
 
 		try {
-			this.logger.debug(methodName, `before POST ${this.url}`);
-			await this.http.post(this.url, JSON.stringify(body), { headers: headers, withCredentials: true }).toPromise();
-			this.logger.debug(methodName, `after POST ${this.url}`);
+			this.logger.debug(methodName, `before POST ${this.configuration.url}`);
+			await this.http.post(this.configuration.url, JSON.stringify(body), { headers: headers, withCredentials: true }).toPromise();
+			this.logger.debug(methodName, `after POST ${this.configuration.url}`);
 		} catch (e) {
 			this.logger.error(methodName, e);
 			throw e;
