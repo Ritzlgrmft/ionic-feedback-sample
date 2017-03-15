@@ -78,6 +78,6 @@
 	<plugin name="cordova-plugin-console" spec="1.0.5"/>
 	<plugin name="cordova-plugin-device" spec="1.1.4"/>
 	<plugin name="com.darktalker.cordova.screenshot" spec="https://github.com/gitawego/cordova-screenshot.git"/>
-	<plugin name="cordova-plugin-shake" space="https://github.com/leecrossley/cordova-plugin-shake.git"/>
+	<plugin name="cordova-plugin-shake" space="https://github.com/Ritzlgrmft/cordova-plugin-shake.git"/>
 	<allow-navigation href="http://192.168.178.45:8100"/>
 </widget>

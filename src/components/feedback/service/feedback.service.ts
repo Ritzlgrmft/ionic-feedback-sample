@@ -57,7 +57,7 @@ export class FeedbackService {
 
 		if (!this.configuration.isEnabled) {
 			this.logger.warn(methodName, "feedback is disabled");
-		} else if (await this.platform.ready() === "cordova" && !Device.isVirtual) {
+		} else if (await this.platform.ready() === "cordova") {
 			Shake.startWatch().subscribe(() => this.onShaken());
 			this.logger.debug(methodName, "subscribed for shake events");
 		} else {
