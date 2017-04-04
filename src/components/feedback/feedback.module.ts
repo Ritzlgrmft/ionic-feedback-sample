@@ -7,19 +7,17 @@ import { FeedbackViewerModalManager } from "./viewer/feedback-viewer-modal.manag
 
 @NgModule({
 	declarations: [
-		FeedbackViewerModalComponent
-	],
-	imports: [
-		IonicModule
-	],
-	exports: [
+		FeedbackViewerModalComponent,
 	],
 	entryComponents: [
-		FeedbackViewerModalComponent
+		FeedbackViewerModalComponent,
+	],
+	imports: [
+		IonicModule,
 	],
 	providers: [
 		FeedbackViewerModalManager,
-		FeedbackService
-	]
+		FeedbackService,
+	],
 })
 export class FeedbackModule { }

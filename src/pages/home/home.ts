@@ -9,7 +9,7 @@ import { FeedbackViewerModalManager, FeedbackViewerTranslation } from "../../com
  */
 @Component({
 	selector: "page-home",
-	templateUrl: "home.html"
+	templateUrl: "home.html",
 })
 export class HomePage {
 
@@ -38,7 +38,7 @@ export class HomePage {
 	public attachAppInfo: boolean;
 	public attachLogMessages: boolean;
 
-	private loggerName = "Ionic.Feedback.Sample.HomePage";
+	// private loggerName = "Ionic.Feedback.Sample.HomePage";
 
 	constructor(
 		private navController: NavController,
@@ -47,16 +47,16 @@ export class HomePage {
 		this.languages = ["en", "de", "custom"];
 		this.selectedLanguage = "en";
 		this.translation = {
-			title: "myTitle",
 			cancel: "myCancel",
-			send: "mySend",
+			email: "myEmail",
+			includeAppInfo: "myIncludeAppInfo",
+			includeDeviceInfo: "myIncludeDeviceInfo",
+			includeLogMessages: "myIncludeLogMessages",
+			includeScreenshot: "myIncludeScreenshot",
 			message: "myMessage",
 			name: "myName",
-			email: "myEmail",
-			includeScreenshot: "myIncludeScreenshot",
-			includeDeviceInfo: "myIncludeDeviceInfo",
-			includeAppInfo: "myIncludeAppInfo",
-			includeLogMessages: "myIncludeLogMessages"
+			send: "mySend",
+			title: "myTitle",
 		};
 		this.categories = ["Issue", "Suggestion"];
 		this.name = "It's me";

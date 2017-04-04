@@ -1,11 +1,11 @@
 import { APP_INITIALIZER, ErrorHandler, NgModule } from "@angular/core";
-import { Http, HttpModule } from "@angular/http";
-import { IonicApp, IonicModule, IonicErrorHandler } from "ionic-angular";
+import { HttpModule } from "@angular/http";
+import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
 import { ConfigurationService } from "ionic-configuration-service";
 import { LoggingService } from "ionic-logging-service";
-import { AppComponent } from "./app.component";
 import { FeedbackModule } from "../components/feedback";
 import { HomePage } from "../pages/home/home";
+import { AppComponent } from "./app.component";
 
 /**
  * Helper function for loading the configuration data.
@@ -19,30 +19,30 @@ export function loadConfiguration(configurationService: ConfigurationService): (
  * NgModule for the app.
  */
 @NgModule({
+	bootstrap: [IonicApp],
 	declarations: [
 		AppComponent,
-		HomePage
+		HomePage,
+	],
+	entryComponents: [
+		AppComponent,
+		HomePage,
 	],
 	imports: [
 		IonicModule.forRoot(AppComponent),
 		HttpModule,
-		FeedbackModule
-	],
-	bootstrap: [IonicApp],
-	entryComponents: [
-		AppComponent,
-		HomePage
+		FeedbackModule,
 	],
 	providers: [
 		{ provide: ErrorHandler, useClass: IonicErrorHandler },
 		ConfigurationService,
 		{
+			deps: [ConfigurationService],
+			multi: true,
 			provide: APP_INITIALIZER,
 			useFactory: loadConfiguration,
-			deps: [ConfigurationService],
-			multi: true
 		},
-		LoggingService
-	]
+		LoggingService,
+	],
 })
 export class AppModule { }

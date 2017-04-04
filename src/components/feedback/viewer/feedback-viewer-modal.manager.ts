@@ -18,7 +18,16 @@ import { Logger, LoggingService, LogMessage } from "ionic-logging-service";
 @Injectable()
 export class FeedbackViewerModalManager {
 
+	/**
+	 * Event submitted when the modal gets closed.
+	 */
+	public modalClosed = new EventEmitter<void>();
+
 	private configuration: FeedbackConfiguration;
+
+	private logger: Logger;
+
+	private modalIsOpen: boolean;
 
 	constructor(
 		private platform: Platform,
@@ -35,16 +44,6 @@ export class FeedbackViewerModalManager {
 
 		this.logger.exit(methodName);
 	}
-
-	/**
-	 * Event submitted when the modal gets closed.
-	 */
-	public modalClosed = new EventEmitter<void>();
-
-	// tslint:disable-next-line:completed-docs
-	private logger: Logger;
-
-	private modalIsOpen: boolean;
 
 	/**
 	 * Opens the modal.
@@ -113,20 +112,20 @@ export class FeedbackViewerModalManager {
 				appName: await AppVersion.getAppName(),
 				packageName: await AppVersion.getPackageName(),
 				versionCode: await AppVersion.getVersionCode(),
-				versionNumber: await AppVersion.getVersionNumber()
+				versionNumber: await AppVersion.getVersionNumber(),
 			};
 		}
 
 		const modal = this.modalController.create(FeedbackViewerModalComponent, {
-			language: language,
-			translation: translation,
-			categories: categories,
-			name: name,
-			email: email,
-			screenshot: screenshot,
-			deviceInfo: deviceInfo,
-			appInfo: appInfo,
-			logMessages: logMessages
+			appInfo,
+			categories,
+			deviceInfo,
+			email,
+			language,
+			logMessages,
+			name,
+			screenshot,
+			translation,
 		});
 		modal.onDidDismiss(() => {
 			this.onModalClosed();

@@ -8,7 +8,7 @@ import { Logger, LoggingService, LogMessage } from "ionic-logging-service";
 
 import { AppInfo } from "../shared/app-info.model";
 import { FeedbackConfiguration } from "../shared/feedback-configuration.model";
-import { FeedbackViewerModalManager } from "../viewer/feedback-viewer-modal.manager";
+// import { FeedbackViewerModalManager } from "../viewer/feedback-viewer-modal.manager";
 
 @Injectable()
 export class FeedbackService {
@@ -34,6 +34,59 @@ export class FeedbackService {
 		this.logger.exit(methodName);
 	}
 
+	public async startWatchForShake(): Promise<void> {
+		const methodName = "startWatchForShake";
+		this.logger.entry(methodName);
+
+		if (!this.configuration.isEnabled) {
+			this.logger.warn(methodName, "feedback is disabled");
+		} else if (await this.platform.ready() === "cordova") {
+			Shake.startWatch().subscribe(() => this.onShaken());
+			this.logger.debug(methodName, "subscribed for shake events");
+		} else {
+			this.logger.warn(methodName, "shaking is not supported");
+		}
+
+		this.logger.exit(methodName);
+	}
+
+	public async sendFeedback(timestamp: string, category: string, message: string, name: string,
+		// tslint:disable-next-line:align
+		email: string, screenshot: string, deviceInfo: Device, appInfo: AppInfo, logMessages: LogMessage[]): Promise<void> {
+
+		const methodName = "sendFeedback";
+		this.logger.entry(methodName);
+
+		const headers = new Headers();
+		headers.append("Accept", "application/json");
+		headers.append("Authorization",
+			"Basic " + btoa("94f4e317-a8ef-4ece-92ff-9e0d9398b5eb" + ":" + "307726c0-f677-4918-beb5-01ca6fce80ea"));
+		headers.append("Content-Type", "application/json");
+		const body = {
+			appInfo,
+			category,
+			deviceInfo,
+			email,
+			message,
+			name,
+			screenshot,
+			logMessages,
+			timestamp,
+		};
+
+		try {
+			this.logger.debug(methodName, `before POST ${this.configuration.url}`);
+			await this.http.post(this.configuration.url, JSON.stringify(body),
+				{ headers, withCredentials: true }).toPromise();
+			this.logger.debug(methodName, `after POST ${this.configuration.url}`);
+		} catch (e) {
+			this.logger.error(methodName, e);
+			throw e;
+		}
+
+		this.logger.exit(methodName);
+	}
+
 	private configure(configuration?: FeedbackConfiguration): void {
 		const methodName = "configure";
 		this.logger.entry(methodName, configuration);
@@ -51,22 +104,6 @@ export class FeedbackService {
 		this.logger.exit(methodName);
 	}
 
-	public async startWatchForShake(): Promise<void> {
-		const methodName = "startWatchForShake";
-		this.logger.entry(methodName);
-
-		if (!this.configuration.isEnabled) {
-			this.logger.warn(methodName, "feedback is disabled");
-		} else if (await this.platform.ready() === "cordova") {
-			Shake.startWatch().subscribe(() => this.onShaken());
-			this.logger.debug(methodName, "subscribed for shake events");
-		} else {
-			this.logger.warn(methodName, "shaking is not supported");
-		}
-
-		this.logger.exit(methodName);
-	}
-
 	private async onShaken(): Promise<void> {
 		const methodName = "onShaken";
 		this.logger.entry(methodName);
@@ -77,38 +114,6 @@ export class FeedbackService {
 		// 	this.configuration.categories, this.configuration.name, this.configuration.email,
 		// 	this.configuration.attachScreenshot, this.configuration.attachDeviceInfo,
 		// 	this.configuration.attachAppInfo, this.configuration.attachLogMessages);
-
-		this.logger.exit(methodName);
-	}
-
-	public async sendFeedback(timestamp: string, category: string, message: string, name: string, email: string, screenshot: string, deviceInfo: Device, appInfo: AppInfo, logMessages: LogMessage[]): Promise<void> {
-		const methodName = "sendFeedback";
-		this.logger.entry(methodName);
-
-		const headers = new Headers();
-		headers.append("Accept", "application/json");
-		headers.append("Authorization", "Basic " + btoa("94f4e317-a8ef-4ece-92ff-9e0d9398b5eb" + ":" + "307726c0-f677-4918-beb5-01ca6fce80ea"));
-		headers.append("Content-Type", "application/json");
-		const body = {
-			timestamp: timestamp,
-			category: category,
-			message: message,
-			name: name,
-			email: email,
-			screenshot: screenshot,
-			deviceInfo: deviceInfo,
-			appInfo: appInfo,
-			logMessages: logMessages
-		};
-
-		try {
-			this.logger.debug(methodName, `before POST ${this.configuration.url}`);
-			await this.http.post(this.configuration.url, JSON.stringify(body), { headers: headers, withCredentials: true }).toPromise();
-			this.logger.debug(methodName, `after POST ${this.configuration.url}`);
-		} catch (e) {
-			this.logger.error(methodName, e);
-			throw e;
-		}
 
 		this.logger.exit(methodName);
 	}

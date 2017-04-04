@@ -1,13 +1,13 @@
 import { Component, OnInit } from "@angular/core";
-import { Headers, Http } from "@angular/http";
+import { Http } from "@angular/http";
 import { AlertController, Loading, LoadingController, NavParams, Platform, ViewController } from "ionic-angular";
 import { Device } from "ionic-native";
 import * as moment from "moment";
 
 import { Logger, LoggingService, LogMessage } from "ionic-logging-service";
 
-import { AppInfo } from "../shared/app-info.model";
 import { FeedbackService } from "../service/feedback.service";
+import { AppInfo } from "../shared/app-info.model";
 import { FeedbackViewerTranslation } from "./feedback-viewer-translation.model";
 
 /**
@@ -15,7 +15,7 @@ import { FeedbackViewerTranslation } from "./feedback-viewer-translation.model";
  */
 @Component({
 	selector: "ionic-feedback-viewer-modal",
-	templateUrl: "feedback-viewer-modal.html"
+	templateUrl: "feedback-viewer-modal.html",
 
 })
 export class FeedbackViewerModalComponent implements OnInit {
@@ -119,29 +119,29 @@ export class FeedbackViewerModalComponent implements OnInit {
 		this.translations = {};
 		// tslint:disable-next-line:no-string-literal
 		this.translations["en"] = {
-			title: "Feedback",
 			cancel: "Cancel",
-			send: "Send",
+			email: "Email",
+			includeAppInfo: "Include App Info",
+			includeDeviceInfo: "Include Device Info",
+			includeLogMessages: "Include Log",
+			includeScreenshot: "Include Screenshot",
 			message: "Message",
 			name: "Name",
-			email: "Email",
-			includeScreenshot: "Include Screenshot",
-			includeDeviceInfo: "Include Device Info",
-			includeAppInfo: "Include App Info",
-			includeLogMessages: "Include Log"
+			send: "Send",
+			title: "Feedback",
 		};
 		// tslint:disable-next-line:no-string-literal
 		this.translations["de"] = {
-			title: "Feedback",
 			cancel: "Abbrechen",
-			send: "Senden",
+			email: "Email",
+			includeAppInfo: "App Info einschließen",
+			includeDeviceInfo: "Geräte Info einschließen",
+			includeLogMessages: "Log einschließen",
+			includeScreenshot: "Screenshot einschließen",
 			message: "Nachricht",
 			name: "Name",
-			email: "Email",
-			includeScreenshot: "Screenshot einschließen",
-			includeDeviceInfo: "Geräte Info einschließen",
-			includeAppInfo: "App Info einschließen",
-			includeLogMessages: "Log einschließen"
+			send: "Senden",
+			title: "Feedback",
 		};
 	}
 
@@ -185,16 +185,16 @@ export class FeedbackViewerModalComponent implements OnInit {
 				this.showScreenshot && this.includeScreenshot ? this.screenshot : undefined,
 				this.showDeviceInfo && this.includeDeviceInfo ? this.deviceInfo : undefined,
 				this.showAppInfo && this.includeAppInfo ? this.appInfo : undefined,
-				this.showLogMessages && this.includeLogMessages ? this.logMessages : undefined
+				this.showLogMessages && this.includeLogMessages ? this.logMessages : undefined,
 			);
 			await loading.dismiss();
 			this.viewController.dismiss();
 		} catch (e) {
 			await loading.dismiss();
 			const alert = this.alertController.create({
-				title: "Feedback",
+				buttons: ["OK"],
 				subTitle: "Could not send feedback",
-				buttons: ["OK"]
+				title: "Feedback",
 			});
 			await alert.present();
 		}
