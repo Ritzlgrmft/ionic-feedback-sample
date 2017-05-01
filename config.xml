@@ -71,11 +71,13 @@
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
+  <preference name="AutoHideSplashScreen" value="true"/>
   <icon src="resources/icon.png"/>
   <plugin name="cordova-plugin-app-version" spec="0.1.9"/>
   <plugin name="cordova-plugin-console" spec="1.0.5"/>
   <plugin name="cordova-plugin-device" spec="1.1.4"/>
   <plugin name="com.darktalker.cordova.screenshot" spec="https://github.com/gitawego/cordova-screenshot.git"/>
   <plugin name="cordova-plugin-shake" space="https://github.com/Ritzlgrmft/cordova-plugin-shake.git"/>
+  <plugin name="cordova-plugin-splashscreen" spec="4.0.2"/>
   <allow-navigation href="http://192.168.178.45:8100"/>
 </widget>

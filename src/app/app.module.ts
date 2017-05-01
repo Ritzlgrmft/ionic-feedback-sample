@@ -6,6 +6,7 @@ import { AppVersion } from "@ionic-native/app-version";
 import { Device } from "@ionic-native/device";
 import { Screenshot } from "@ionic-native/screenshot";
 import { Shake } from "@ionic-native/shake";
+import { SplashScreen } from "@ionic-native/splash-screen";
 import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
 
 import { ConfigurationService } from "ionic-configuration-service";
@@ -58,6 +59,7 @@ export function loadConfiguration(configurationService: ConfigurationService): (
 		Device,
 		Screenshot,
 		Shake,
+		SplashScreen,
 	],
 })
 export class AppModule { }

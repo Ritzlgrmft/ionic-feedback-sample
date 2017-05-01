@@ -1,4 +1,6 @@
 import { Component } from "@angular/core";
+
+import { SplashScreen } from "@ionic-native/splash-screen";
 import { Platform } from "ionic-angular";
 
 import { FeedbackService, FeedbackViewerModalManager } from "../components/feedback";
@@ -20,6 +22,7 @@ export class AppComponent {
 
 	constructor(
 		platform: Platform,
+		splashScreen: SplashScreen,
 		feedbackService: FeedbackService,
 		private feedbackViewerModalManager: FeedbackViewerModalManager) {
 		platform.ready().then(() => {
@@ -27,8 +30,7 @@ export class AppComponent {
 				this.onShaken();
 			});
 			feedbackService.startWatchForShake();
-			// StatusBar.styleDefault();
-			// Splashscreen.hide();
+			splashScreen.hide();
 		});
 	}
 

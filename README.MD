@@ -31,4 +31,3 @@ ionic serve
 - implement error handler
 - prevent second modal
 - prod build does not start on device
-- hide splash screen manually
