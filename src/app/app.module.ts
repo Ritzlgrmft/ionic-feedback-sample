@@ -1,6 +1,13 @@
 import { APP_INITIALIZER, ErrorHandler, NgModule } from "@angular/core";
 import { HttpModule } from "@angular/http";
+import { BrowserModule } from "@angular/platform-browser";
+
+import { AppVersion } from "@ionic-native/app-version";
+import { Device } from "@ionic-native/device";
+import { Screenshot } from "@ionic-native/screenshot";
+import { Shake } from "@ionic-native/shake";
 import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
+
 import { ConfigurationService } from "ionic-configuration-service";
 import { LoggingService } from "ionic-logging-service";
 import { FeedbackModule } from "../components/feedback";
@@ -29,9 +36,10 @@ export function loadConfiguration(configurationService: ConfigurationService): (
 		HomePage,
 	],
 	imports: [
-		IonicModule.forRoot(AppComponent),
-		HttpModule,
+		BrowserModule,
 		FeedbackModule,
+		HttpModule,
+		IonicModule.forRoot(AppComponent),
 	],
 	providers: [
 		{ provide: ErrorHandler, useClass: IonicErrorHandler },
@@ -43,6 +51,10 @@ export function loadConfiguration(configurationService: ConfigurationService): (
 			useFactory: loadConfiguration,
 		},
 		LoggingService,
+		AppVersion,
+		Device,
+		Screenshot,
+		Shake,
 	],
 })
 export class AppModule { }

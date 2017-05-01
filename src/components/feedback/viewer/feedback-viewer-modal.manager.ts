@@ -1,8 +1,9 @@
 import { EventEmitter, Injectable } from "@angular/core";
+
 import { ModalController, Platform } from "ionic-angular";
-import { AppVersion } from "ionic-native";
-import { Device } from "ionic-native";
-import { Screenshot } from "ionic-native";
+import { AppVersion } from "@ionic-native/app-version";
+import { Device } from "@ionic-native/device";
+import { Screenshot } from "@ionic-native/screenshot";
 
 import { AppInfo } from "../shared/app-info.model";
 import { FeedbackConfiguration } from "../shared/feedback-configuration.model";
@@ -32,6 +33,9 @@ export class FeedbackViewerModalManager {
 	constructor(
 		private platform: Platform,
 		private modalController: ModalController,
+		private appVersion: AppVersion,
+		private device: Device,
+		private screenshot: Screenshot,
 		configurationService: ConfigurationService,
 		private loggingService: LoggingService) {
 
@@ -91,7 +95,7 @@ export class FeedbackViewerModalManager {
 		if (attachScreenshot) {
 			try {
 				if (await this.platform.ready() === "cordova") {
-					screenshot = (await Screenshot.URI()).URI;
+					screenshot = (await this.screenshot.URI()).URI;
 					this.logger.debug(methodName, "screenshot taken");
 				} else {
 					this.logger.debug(methodName, "no screenshot taken since not running on device");
@@ -103,16 +107,16 @@ export class FeedbackViewerModalManager {
 		}
 
 		// retrieve device info		
-		const deviceInfo = (this.platform.is("cordova") && attachDeviceInfo) ? Device : undefined;
+		const deviceInfo = (this.platform.is("cordova") && attachDeviceInfo) ? this.device : undefined;
 
 		// retrieve app info
 		let appInfo: AppInfo = undefined;
 		if (this.platform.is("cordova") && attachAppInfo) {
 			appInfo = {
-				appName: await AppVersion.getAppName(),
-				packageName: await AppVersion.getPackageName(),
-				versionCode: await AppVersion.getVersionCode(),
-				versionNumber: await AppVersion.getVersionNumber(),
+				appName: await this.appVersion.getAppName(),
+				packageName: await this.appVersion.getPackageName(),
+				versionCode: await this.appVersion.getVersionCode(),
+				versionNumber: await this.appVersion.getVersionNumber(),
 			};
 		}
 

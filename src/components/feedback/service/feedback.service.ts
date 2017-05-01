@@ -1,7 +1,9 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { Headers, Http } from "@angular/http";
+
 import { Platform } from "ionic-angular";
-import { Device, Shake } from "ionic-native";
+import { Device } from "@ionic-native/device";
+import { Shake } from "@ionic-native/shake";
 
 import { ConfigurationService } from "ionic-configuration-service";
 import { Logger, LoggingService, LogMessage } from "ionic-logging-service";
@@ -21,6 +23,8 @@ export class FeedbackService {
 	constructor(
 		private http: Http,
 		private platform: Platform,
+		private device: Device,
+		private shake: Shake,
 		private configurationService: ConfigurationService,
 		loggingService: LoggingService) {
 
@@ -41,7 +45,7 @@ export class FeedbackService {
 		if (!this.configuration.isEnabled) {
 			this.logger.warn(methodName, "feedback is disabled");
 		} else if (await this.platform.ready() === "cordova") {
-			Shake.startWatch().subscribe(() => this.onShaken());
+			this.shake.startWatch().subscribe(() => this.onShaken());
 			this.logger.debug(methodName, "subscribed for shake events");
 		} else {
 			this.logger.warn(methodName, "shaking is not supported");

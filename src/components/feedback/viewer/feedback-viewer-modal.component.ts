@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Http } from "@angular/http";
 import { AlertController, Loading, LoadingController, NavParams, Platform, ViewController } from "ionic-angular";
-import { Device } from "ionic-native";
+import { Device } from "@ionic-native/Device";
 import * as moment from "moment";
 
 import { Logger, LoggingService, LogMessage } from "ionic-logging-service";
