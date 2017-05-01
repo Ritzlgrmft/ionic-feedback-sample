@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Http } from "@angular/http";
-import { AlertController, Loading, LoadingController, NavParams, Platform, ViewController } from "ionic-angular";
+
 import { Device } from "@ionic-native/Device";
+import { AlertController, Loading, LoadingController, NavParams, Platform, ViewController } from "ionic-angular";
+
 import * as moment from "moment";
 
 import { Logger, LoggingService, LogMessage } from "ionic-logging-service";
@@ -59,7 +61,7 @@ export class FeedbackViewerModalComponent implements OnInit {
 	// tslint:disable-next-line:completed-docs
 	private logger: Logger;
 
-	// tslint:disable-next-line:completed-docs	
+	// tslint:disable-next-line:completed-docs
 	private translations: { [language: string]: FeedbackViewerTranslation; };
 
 	constructor(

@@ -1,0 +1,12 @@
+page-settings {
+    ion-card-header {
+        padding: 0 !important;
+        ion-item {
+            font-weight: bold !important;
+            background-color: color($colors, light) !important;
+            ion-icon {
+                margin-right: 0 !important;
+            }
+        }
+    }
+}

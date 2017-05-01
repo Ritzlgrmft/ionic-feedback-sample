@@ -12,6 +12,7 @@ import { ConfigurationService } from "ionic-configuration-service";
 import { LoggingService } from "ionic-logging-service";
 import { FeedbackModule } from "../components/feedback";
 import { HomePage } from "../pages/home/home";
+import { SettingsPage } from "../pages/settings/settings";
 import { AppComponent } from "./app.component";
 
 /**
@@ -30,10 +31,12 @@ export function loadConfiguration(configurationService: ConfigurationService): (
 	declarations: [
 		AppComponent,
 		HomePage,
+		SettingsPage,
 	],
 	entryComponents: [
 		AppComponent,
 		HomePage,
+		SettingsPage,
 	],
 	imports: [
 		BrowserModule,

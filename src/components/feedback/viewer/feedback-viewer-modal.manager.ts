@@ -1,12 +1,14 @@
 import { EventEmitter, Injectable } from "@angular/core";
 
-import { ModalController, Platform } from "ionic-angular";
 import { AppVersion } from "@ionic-native/app-version";
 import { Device } from "@ionic-native/device";
 import { Screenshot } from "@ionic-native/screenshot";
+import { ModalController, Platform } from "ionic-angular";
 
+import { FeedbackService } from "../service/feedback.service";
 import { AppInfo } from "../shared/app-info.model";
 import { FeedbackConfiguration } from "../shared/feedback-configuration.model";
+import { FeedbackContact } from "../shared/feedback-contact.model";
 import { FeedbackViewerModalComponent } from "./feedback-viewer-modal.component";
 import { FeedbackViewerTranslation } from "./feedback-viewer-translation.model";
 
@@ -25,6 +27,7 @@ export class FeedbackViewerModalManager {
 	public modalClosed = new EventEmitter<void>();
 
 	private configuration: FeedbackConfiguration;
+	private contact: FeedbackContact;
 
 	private logger: Logger;
 
@@ -36,14 +39,16 @@ export class FeedbackViewerModalManager {
 		private appVersion: AppVersion,
 		private device: Device,
 		private screenshot: Screenshot,
-		configurationService: ConfigurationService,
-		private loggingService: LoggingService) {
+		private loggingService: LoggingService,
+		private feedbackService: FeedbackService) {
 
 		this.logger = loggingService.getLogger("Ionic.Feedback.Viewer.Modal.Manager");
 		const methodName = "ctor";
 		this.logger.entry(methodName);
 
-		this.configuration = configurationService.getValue<FeedbackConfiguration>("feedback");
+		this.configuration = feedbackService.configuration;
+		this.contact = feedbackService.contact;
+
 		this.modalIsOpen = false;
 
 		this.logger.exit(methodName);
@@ -67,15 +72,15 @@ export class FeedbackViewerModalManager {
 		language: string = this.configuration.language,
 		translation: FeedbackViewerTranslation = this.configuration.translation,
 		categories: string[] = this.configuration.categories,
-		name: string = this.configuration.name,
-		email: string = this.configuration.email,
+		name: string = this.contact.name,
+		email: string = this.contact.email,
 		attachScreenshot: boolean = this.configuration.attachScreenshot,
 		attachDeviceInfo: boolean = this.configuration.attachDeviceInfo,
 		attachAppInfo: boolean = this.configuration.attachAppInfo,
 		attachLogMessages: boolean = this.configuration.attachLogMessages): Promise<void> {
 
 		// retrieve log messages (as soon as possible)
-		let logMessages: LogMessage[] = undefined;
+		let logMessages: LogMessage[];
 		if (attachLogMessages) {
 			// thanks to slice(), the array is cloned
 			logMessages = this.loggingService.getLogMessages().slice(0);
@@ -91,7 +96,7 @@ export class FeedbackViewerModalManager {
 		}
 
 		// take screenshot
-		let screenshot: string = undefined;
+		let screenshot: string;
 		if (attachScreenshot) {
 			try {
 				if (await this.platform.ready() === "cordova") {
@@ -106,11 +111,11 @@ export class FeedbackViewerModalManager {
 			}
 		}
 
-		// retrieve device info		
+		// retrieve device info
 		const deviceInfo = (this.platform.is("cordova") && attachDeviceInfo) ? this.device : undefined;
 
 		// retrieve app info
-		let appInfo: AppInfo = undefined;
+		let appInfo: AppInfo;
 		if (this.platform.is("cordova") && attachAppInfo) {
 			appInfo = {
 				appName: await this.appVersion.getAppName(),

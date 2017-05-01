@@ -29,8 +29,6 @@ ionic serve
 
 - translate feedback alert
 - implement error handler
-- FeedbackViewerModalComponent: more than 2 seconds delay between constructor and ionViewDidEnter
 - prevent second modal
 - prod build does not start on device
-- start with empty page
 - hide splash screen manually

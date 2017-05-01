@@ -1,24 +1,25 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { Headers, Http } from "@angular/http";
 
-import { Platform } from "ionic-angular";
 import { Device } from "@ionic-native/device";
 import { Shake } from "@ionic-native/shake";
+import { Platform } from "ionic-angular";
 
 import { ConfigurationService } from "ionic-configuration-service";
 import { Logger, LoggingService, LogMessage } from "ionic-logging-service";
 
 import { AppInfo } from "../shared/app-info.model";
 import { FeedbackConfiguration } from "../shared/feedback-configuration.model";
-// import { FeedbackViewerModalManager } from "../viewer/feedback-viewer-modal.manager";
+import { FeedbackContact } from "../shared/feedback-contact.model";
 
 @Injectable()
 export class FeedbackService {
 
 	public shaken: EventEmitter<void>;
-	private logger: Logger;
+	public configuration: FeedbackConfiguration;
+	public contact: FeedbackContact;
 
-	private configuration: FeedbackConfiguration;
+	private logger: Logger;
 
 	constructor(
 		private http: Http,
@@ -104,6 +105,7 @@ export class FeedbackService {
 		}
 
 		this.configuration = configuration;
+		this.contact = {};
 
 		this.logger.exit(methodName);
 	}
@@ -113,11 +115,6 @@ export class FeedbackService {
 		this.logger.entry(methodName);
 
 		this.shaken.emit();
-		// const feedbackViewerModalManager: FeedbackViewerModalManager = this.injector.get(FeedbackViewerModalManager);
-		// await feedbackViewerModalManager.openModal(this.configuration.language, this.configuration.translation,
-		// 	this.configuration.categories, this.configuration.name, this.configuration.email,
-		// 	this.configuration.attachScreenshot, this.configuration.attachDeviceInfo,
-		// 	this.configuration.attachAppInfo, this.configuration.attachLogMessages);
 
 		this.logger.exit(methodName);
 	}

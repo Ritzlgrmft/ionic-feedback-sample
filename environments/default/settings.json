@@ -10,10 +10,10 @@
 	"feedback": {
 		"isEnabled": true,
 		"url": "http://localhost:5000/api/Feedback",
-		"language": "de",
+		"language": "en",
 		"categories": [
-			"Kat 1",
-			"Kat 2"
+			"Issue",
+			"Suggestion"
 		],
 		"attachScreenshot": true,
 		"attachDeviceInfo": true,

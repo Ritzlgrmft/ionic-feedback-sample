@@ -1,8 +1,12 @@
 import { Component } from "@angular/core";
-import { ItemSliding, NavController, reorderArray } from "ionic-angular";
+import { ItemSliding, ModalController, NavController, reorderArray } from "ionic-angular";
 import { ReorderIndexes } from "ionic-angular/components/item/item-reorder";
 
+import { LoggingService, Logger } from "ionic-logging-service";
+
 import { FeedbackViewerModalManager, FeedbackViewerTranslation } from "../../components/feedback";
+
+import { SettingsPage } from "../settings/settings";
 
 /**
  * Home page.
@@ -38,40 +42,29 @@ export class HomePage {
 	public attachAppInfo: boolean;
 	public attachLogMessages: boolean;
 
-	// private loggerName = "Ionic.Feedback.Sample.HomePage";
+	private logger: Logger;
 
 	constructor(
+		private modalController: ModalController,
 		private navController: NavController,
+		loggingService: LoggingService,
 		private feedbackViewerModalManager: FeedbackViewerModalManager) {
 
-		this.languages = ["en", "de", "custom"];
-		this.selectedLanguage = "en";
-		this.translation = {
-			cancel: "myCancel",
-			email: "myEmail",
-			includeAppInfo: "myIncludeAppInfo",
-			includeDeviceInfo: "myIncludeDeviceInfo",
-			includeLogMessages: "myIncludeLogMessages",
-			includeScreenshot: "myIncludeScreenshot",
-			message: "myMessage",
-			name: "myName",
-			send: "mySend",
-			title: "myTitle",
-		};
-		this.categories = ["Issue", "Suggestion"];
-		this.name = "It's me";
-		this.email = "somebody@somewhere.com";
-		this.attachScreenshot = true;
-		this.attachDeviceInfo = true;
-		this.attachAppInfo = true;
-		this.attachLogMessages = true;
+		this.logger = loggingService.getLogger("Ionic.Feedback.Sample.HomePage");
+		const methodName = "ctor";
+		this.logger.entry(methodName);
+
+		this.logger.exit(methodName);
 	}
 
 	/**
 	 * Open feedback modal.
 	 */
-	public openModal(): void {
-		this.feedbackViewerModalManager.openModal(
+	public async openFeedback(): Promise<void> {
+		const methodName = "openFeedback";
+		this.logger.entry(methodName);
+
+		await this.feedbackViewerModalManager.openModal(
 			this.selectedLanguage === "custom" ? undefined : this.selectedLanguage,
 			this.selectedLanguage === "custom" ? this.translation : undefined,
 			this.categories,
@@ -81,29 +74,20 @@ export class HomePage {
 			this.attachDeviceInfo,
 			this.attachAppInfo,
 			this.attachLogMessages);
+
+		this.logger.exit(methodName);
 	}
 
 	/**
-	 * Change the language for the feedback modal.
+	 * Open settings modal.
 	 */
-	public changeLanguage(language: string): void {
-		this.selectedLanguage = language;
-	}
+	public async openSettings(): Promise<void> {
+		const methodName = "openSettings";
+		this.logger.entry(methodName);
 
-	public reorderCategories(indexes: ReorderIndexes): void {
-		this.categories = reorderArray(this.categories, indexes);
-	}
+		const modal = this.modalController.create(SettingsPage);
+		await modal.present();
 
-	public deleteCategory(categoryToDelete: ItemSliding): void {
-		for (let i = 0; i < this.categories.length; i++) {
-			if (this.categories[i] === categoryToDelete.toString()) {
-				this.categories.splice(i, 1);
-				break;
-			}
-		}
-	}
-
-	public addCategory(): void {
-		this.categories.push(`Category ${this.categories.length + 1}`);
+		this.logger.exit(methodName);
 	}
 }

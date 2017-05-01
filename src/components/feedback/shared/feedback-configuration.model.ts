@@ -9,8 +9,6 @@ export interface FeedbackConfiguration {
 	language: string;
 	translation: FeedbackViewerTranslation;
 	categories: string[];
-	name: string;
-	email: string;
 	attachScreenshot: boolean;
 	attachDeviceInfo: boolean;
 	attachAppInfo: boolean;
