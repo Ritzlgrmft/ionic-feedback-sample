@@ -95,52 +95,60 @@ export class FeedbackViewerModalManager {
 			throw new Error("FeedbackViewerModalComponent is already open");
 		}
 
-		// take screenshot
-		let screenshot: string;
-		if (attachScreenshot) {
-			try {
-				if (await this.platform.ready() === "cordova") {
-					screenshot = (await this.screenshot.URI()).URI;
-					this.logger.debug(methodName, "screenshot taken");
-				} else {
-					this.logger.debug(methodName, "no screenshot taken since not running on device");
+		try {
+			this.modalIsOpen = true;
+
+			// take screenshot
+			let screenshot: string;
+			if (attachScreenshot) {
+				try {
+					if (await this.platform.ready() === "cordova") {
+						screenshot = (await this.screenshot.URI()).URI;
+						this.logger.debug(methodName, "screenshot taken");
+					} else {
+						this.logger.debug(methodName, "no screenshot taken since not running on device");
+					}
+				} catch (e) {
+					// TODO: add errorhandling
+					this.logger.error(methodName, "could not take screenshot", e);
 				}
-			} catch (e) {
-				// TODO: add errorhandling
-				this.logger.error(methodName, "could not take screenshot", e);
 			}
+
+			// retrieve device info
+			const deviceInfo = (this.platform.is("cordova") && attachDeviceInfo) ? this.device : undefined;
+
+			// retrieve app info
+			let appInfo: AppInfo;
+			if (this.platform.is("cordova") && attachAppInfo) {
+				appInfo = {
+					appName: await this.appVersion.getAppName(),
+					packageName: await this.appVersion.getPackageName(),
+					versionCode: await this.appVersion.getVersionCode(),
+					versionNumber: await this.appVersion.getVersionNumber(),
+				};
+			}
+
+			const modal = this.modalController.create(FeedbackViewerModalComponent, {
+				appInfo,
+				categories,
+				deviceInfo,
+				email,
+				language,
+				logMessages,
+				name,
+				screenshot,
+				translation,
+			});
+			modal.onDidDismiss(() => {
+				this.onModalClosed();
+			});
+			await modal.present();
+		} catch (e) {
+			this.logger.error(methodName, e);
+			// something went wrong, so the modal is not open
+			this.modalIsOpen = false;
+			throw e;
 		}
-
-		// retrieve device info
-		const deviceInfo = (this.platform.is("cordova") && attachDeviceInfo) ? this.device : undefined;
-
-		// retrieve app info
-		let appInfo: AppInfo;
-		if (this.platform.is("cordova") && attachAppInfo) {
-			appInfo = {
-				appName: await this.appVersion.getAppName(),
-				packageName: await this.appVersion.getPackageName(),
-				versionCode: await this.appVersion.getVersionCode(),
-				versionNumber: await this.appVersion.getVersionNumber(),
-			};
-		}
-
-		const modal = this.modalController.create(FeedbackViewerModalComponent, {
-			appInfo,
-			categories,
-			deviceInfo,
-			email,
-			language,
-			logMessages,
-			name,
-			screenshot,
-			translation,
-		});
-		modal.onDidDismiss(() => {
-			this.onModalClosed();
-		});
-		await modal.present();
-		this.modalIsOpen = true;
 
 		this.logger.exit(methodName);
 	}
