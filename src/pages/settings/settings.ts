@@ -69,12 +69,14 @@ export class SettingsPage {
 			this.translation = {
 				cancel: "myCancel",
 				email: "myEmail",
+				errorSending: "myErrorSending",
 				includeAppInfo: "myIncludeAppInfo",
 				includeDeviceInfo: "myIncludeDeviceInfo",
 				includeLogMessages: "myIncludeLogMessages",
 				includeScreenshot: "myIncludeScreenshot",
 				message: "myMessage",
 				name: "myName",
+				ok: "myOk",
 				send: "mySend",
 				title: "myTitle",
 			};

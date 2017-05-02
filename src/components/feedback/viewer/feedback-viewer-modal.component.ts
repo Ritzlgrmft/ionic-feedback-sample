@@ -123,12 +123,14 @@ export class FeedbackViewerModalComponent implements OnInit {
 		this.translations["en"] = {
 			cancel: "Cancel",
 			email: "Email",
+			errorSending: "Could not send feedback",
 			includeAppInfo: "Include App Info",
 			includeDeviceInfo: "Include Device Info",
 			includeLogMessages: "Include Log",
 			includeScreenshot: "Include Screenshot",
 			message: "Message",
 			name: "Name",
+			ok: "OK",
 			send: "Send",
 			title: "Feedback",
 		};
@@ -136,12 +138,14 @@ export class FeedbackViewerModalComponent implements OnInit {
 		this.translations["de"] = {
 			cancel: "Abbrechen",
 			email: "Email",
+			errorSending: "Feedback konnte nicht gesendet werden",
 			includeAppInfo: "App Info einschließen",
 			includeDeviceInfo: "Geräte Info einschließen",
 			includeLogMessages: "Log einschließen",
 			includeScreenshot: "Screenshot einschließen",
 			message: "Nachricht",
 			name: "Name",
+			ok: "OK",
 			send: "Senden",
 			title: "Feedback",
 		};
@@ -194,9 +198,9 @@ export class FeedbackViewerModalComponent implements OnInit {
 		} catch (e) {
 			await loading.dismiss();
 			const alert = this.alertController.create({
-				buttons: ["OK"],
-				subTitle: "Could not send feedback",
-				title: "Feedback",
+				buttons: [this.getTranslation().ok],
+				subTitle: this.getTranslation().errorSending,
+				title: this.getTranslation().title,
 			});
 			await alert.present();
 		}

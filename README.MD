@@ -27,6 +27,4 @@ ionic serve
 
 ## Todos
 
-- translate feedback alert
 - implement error handler
-- prod build does not start on device

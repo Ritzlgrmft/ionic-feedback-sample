@@ -53,4 +53,14 @@ export interface FeedbackViewerTranslation {
 	 * Include log label.
 	 */
 	includeLogMessages: string;
+
+	/**
+	 * OK button.
+	 */
+	ok: string;
+
+	/**
+	 * Error message, if feedback could not be sent.
+	 */
+	errorSending: string;
 }
