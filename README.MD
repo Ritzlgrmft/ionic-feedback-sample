@@ -26,5 +26,3 @@ ionic serve
 ```
 
 ## Todos
-
-- implement error handler

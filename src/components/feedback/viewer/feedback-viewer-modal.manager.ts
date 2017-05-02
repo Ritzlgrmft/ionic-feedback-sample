@@ -109,7 +109,6 @@ export class FeedbackViewerModalManager {
 						this.logger.debug(methodName, "no screenshot taken since not running on device");
 					}
 				} catch (e) {
-					// TODO: add errorhandling
 					this.logger.error(methodName, "could not take screenshot", e);
 				}
 			}
