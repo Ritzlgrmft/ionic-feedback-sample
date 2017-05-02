@@ -26,3 +26,5 @@ ionic serve
 ```
 
 ## Todos
+
+- split in component and sample
