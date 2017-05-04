@@ -57,7 +57,7 @@
 		"@ionic/cli-plugin-cordova": "beta",
 		"@types/cordova": "0.0.34",
 		"codelyzer": "3.0.1",
-		"tslint": "5.1.0",
+		"tslint": "5.2.0",
 		"typescript": "2.2.1",
 		"semantic-release": "6.3.2"
 	}
