@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { ItemSliding, ModalController, NavController, reorderArray } from "ionic-angular";
 import { ReorderIndexes } from "ionic-angular/components/item/item-reorder";
 
-import { LoggingService, Logger } from "ionic-logging-service";
+import { Logger, LoggingService } from "ionic-logging-service";
 
 import { FeedbackViewerModalManager, FeedbackViewerTranslation } from "../../components/feedback";
 

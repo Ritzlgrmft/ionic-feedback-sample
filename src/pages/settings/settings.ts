@@ -4,7 +4,7 @@ import { ReorderIndexes } from "ionic-angular/components/item/item-reorder";
 
 import { Logger, LoggingService } from "ionic-logging-service";
 
-import { FeedbackService, FeedbackViewerModalManager, FeedbackViewerTranslation } from "../../components/feedback";
+import { FeedbackService, FeedbackViewerTranslation } from "../../components/feedback";
 import { FeedbackConfiguration } from "../../components/feedback/shared/feedback-configuration.model";
 import { FeedbackContact } from "../../components/feedback/shared/feedback-contact.model";
 
@@ -50,8 +50,7 @@ export class SettingsPage {
 		private navController: NavController,
 		private viewController: ViewController,
 		loggingService: LoggingService,
-		private feedbackService: FeedbackService,
-		private feedbackViewerModalManager: FeedbackViewerModalManager) {
+		private feedbackService: FeedbackService) {
 
 		this.logger = loggingService.getLogger("Ionic.Feedback.Sample.SettingsPage");
 		const methodName = "ctor";
