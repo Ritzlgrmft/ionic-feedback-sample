@@ -9,7 +9,7 @@
 	},
 	"feedback": {
 		"isEnabled": true,
-		"url": "http://localhost:5000/api/Feedback",
+		"url": "https://ionic-feedback-backend.azurewebsites.net/api/Feedback",
 		"language": "en",
 		"categories": [
 			"Issue",
