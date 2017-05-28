@@ -177,9 +177,8 @@ export class FeedbackViewerModalComponent implements OnInit {
 		const methodName = "onSend";
 		this.logger.entry(methodName);
 
-		let loading: Loading;
+		const loading = this.loadingController.create();
 		try {
-			loading = this.loadingController.create();
 			loading.present();
 
 			await this.feedbackService.sendFeedback(

@@ -55,9 +55,10 @@ export class FeedbackService {
 		this.logger.exit(methodName);
 	}
 
-	public async sendFeedback(timestamp: string, category: string, message: string, name: string,
-		// tslint:disable-next-line:align
-		email: string, screenshot: string, deviceInfo: Device, appInfo: AppInfo, logMessages: LogMessage[]): Promise<void> {
+	public async sendFeedback(
+		timestamp: string, category: string, message: string, name: string,
+		email: string, screenshot: string | undefined, deviceInfo: Device | undefined, appInfo: AppInfo | undefined,
+		logMessages: LogMessage[] | undefined): Promise<void> {
 
 		const methodName = "sendFeedback";
 		this.logger.entry(methodName);
@@ -72,10 +73,10 @@ export class FeedbackService {
 			category,
 			deviceInfo,
 			email,
+			logMessages,
 			message,
 			name,
 			screenshot,
-			logMessages,
 			timestamp,
 		};
 

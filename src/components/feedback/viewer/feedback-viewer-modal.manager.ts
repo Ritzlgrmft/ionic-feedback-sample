@@ -72,15 +72,15 @@ export class FeedbackViewerModalManager {
 		language: string = this.configuration.language,
 		translation: FeedbackViewerTranslation = this.configuration.translation,
 		categories: string[] = this.configuration.categories,
-		name: string = this.contact.name,
-		email: string = this.contact.email,
+		name: string | undefined = this.contact.name,
+		email: string | undefined = this.contact.email,
 		attachScreenshot: boolean = this.configuration.attachScreenshot,
 		attachDeviceInfo: boolean = this.configuration.attachDeviceInfo,
 		attachAppInfo: boolean = this.configuration.attachAppInfo,
 		attachLogMessages: boolean = this.configuration.attachLogMessages): Promise<void> {
 
 		// retrieve log messages (as soon as possible)
-		let logMessages: LogMessage[];
+		let logMessages: LogMessage[] | undefined;
 		if (attachLogMessages) {
 			// thanks to slice(), the array is cloned
 			logMessages = this.loggingService.getLogMessages().slice(0);
@@ -99,7 +99,7 @@ export class FeedbackViewerModalManager {
 			this.modalIsOpen = true;
 
 			// take screenshot
-			let screenshot: string;
+			let screenshot: string | undefined;
 			if (attachScreenshot) {
 				try {
 					if (await this.platform.ready() === "cordova") {
@@ -117,7 +117,7 @@ export class FeedbackViewerModalManager {
 			const deviceInfo = (this.platform.is("cordova") && attachDeviceInfo) ? this.device : undefined;
 
 			// retrieve app info
-			let appInfo: AppInfo;
+			let appInfo: AppInfo | undefined;
 			if (this.platform.is("cordova") && attachAppInfo) {
 				appInfo = {
 					appName: await this.appVersion.getAppName(),

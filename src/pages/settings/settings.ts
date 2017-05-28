@@ -34,8 +34,8 @@ export class SettingsPage {
 
 	public categories: string[];
 
-	public name: string;
-	public email: string;
+	public name: string | undefined;
+	public email: string | undefined;
 
 	public attachScreenshot: boolean;
 	public attachDeviceInfo: boolean;
