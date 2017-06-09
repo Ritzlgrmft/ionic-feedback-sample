@@ -14,6 +14,7 @@ import { FeedbackViewerTranslation } from "./feedback-viewer-translation.model";
 
 import { ConfigurationService } from "ionic-configuration-service";
 import { Logger, LoggingService, LogMessage } from "ionic-logging-service";
+import { AttachmentState } from "../shared/attachment-state.model";
 
 /**
  * Helper class which makes the usage of the FeedbackViewerModalComponent more comfortable.
@@ -63,7 +64,7 @@ export class FeedbackViewerModalManager {
 	 * @param name name of the contact.
 	 * @param email email address.
 	 * @param attachScreenshot if true, a shot of the current screen will be attached.
-	 * @param attachLogMessages if true, the last log messages will be attached.
+	 * @param attachLogMessages shall the last log messages be attached.
 	 * @param attachDeviceInfo if true, the device info will be attached.
 	 * @param attachAppInfo if true, the app info will be attached.
 	 * @returns Promise which gets resolved as soon as the modal is shown.
@@ -77,7 +78,7 @@ export class FeedbackViewerModalManager {
 		attachScreenshot: boolean = this.configuration.attachScreenshot,
 		attachDeviceInfo: boolean = this.configuration.attachDeviceInfo,
 		attachAppInfo: boolean = this.configuration.attachAppInfo,
-		attachLogMessages: boolean = this.configuration.attachLogMessages): Promise<void> {
+		attachLogMessages: AttachmentState = this.configuration.attachLogMessages): Promise<void> {
 
 		// retrieve log messages (as soon as possible)
 		let logMessages: LogMessage[] | undefined;
@@ -129,6 +130,7 @@ export class FeedbackViewerModalManager {
 
 			const modal = this.modalController.create(FeedbackViewerModalComponent, {
 				appInfo,
+				attachLogMessages,
 				categories,
 				deviceInfo,
 				email,

@@ -20,7 +20,7 @@
 
 	<ion-list>
 		<ion-item *ngIf="showCategories">
-			<ion-select [(ngModel)]="category">
+			<ion-select [(ngModel)]="category" interface="popover">
 				<ion-option *ngFor="let c of categories" [value]="c">{{c}}</ion-option>
 			</ion-select>
 		</ion-item>

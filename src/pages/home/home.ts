@@ -17,36 +17,10 @@ import { SettingsPage } from "../settings/settings";
 })
 export class HomePage {
 
-	/**
-	 * Available languages for FeedbackViewerModalManager.
-	 */
-	public languages: string[];
-
-	/**
-	 * Selected language.
-	 */
-	public selectedLanguage: string;
-
-	/**
-	 * Custom translation, used if selectedLanguage === "custom"
-	 */
-	public translation: FeedbackViewerTranslation;
-
-	public categories: string[];
-
-	public name: string;
-	public email: string;
-
-	public attachScreenshot: boolean;
-	public attachDeviceInfo: boolean;
-	public attachAppInfo: boolean;
-	public attachLogMessages: boolean;
-
 	private logger: Logger;
 
 	constructor(
 		private modalController: ModalController,
-		private navController: NavController,
 		loggingService: LoggingService,
 		private feedbackViewerModalManager: FeedbackViewerModalManager) {
 
@@ -64,16 +38,7 @@ export class HomePage {
 		const methodName = "openFeedback";
 		this.logger.entry(methodName);
 
-		await this.feedbackViewerModalManager.openModal(
-			this.selectedLanguage === "custom" ? undefined : this.selectedLanguage,
-			this.selectedLanguage === "custom" ? this.translation : undefined,
-			this.categories,
-			this.name,
-			this.email,
-			this.attachScreenshot,
-			this.attachDeviceInfo,
-			this.attachAppInfo,
-			this.attachLogMessages);
+		await this.feedbackViewerModalManager.openModal();
 
 		this.logger.exit(methodName);
 	}

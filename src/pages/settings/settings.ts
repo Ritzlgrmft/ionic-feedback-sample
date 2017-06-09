@@ -4,7 +4,7 @@ import { ReorderIndexes } from "ionic-angular/components/item/item-reorder";
 
 import { Logger, LoggingService } from "ionic-logging-service";
 
-import { FeedbackService, FeedbackViewerTranslation } from "../../components/feedback";
+import { AttachmentState, FeedbackService, FeedbackViewerTranslation } from "../../components/feedback";
 import { FeedbackConfiguration } from "../../components/feedback/shared/feedback-configuration.model";
 import { FeedbackContact } from "../../components/feedback/shared/feedback-contact.model";
 
@@ -37,10 +37,11 @@ export class SettingsPage {
 	public name: string | undefined;
 	public email: string | undefined;
 
+	public attachmentStates: Array<{ value: number, text: string }>;
 	public attachScreenshot: boolean;
 	public attachDeviceInfo: boolean;
 	public attachAppInfo: boolean;
-	public attachLogMessages: boolean;
+	public attachLogMessages: AttachmentState;
 
 	private logger: Logger;
 	private configuration: FeedbackConfiguration;
@@ -55,6 +56,11 @@ export class SettingsPage {
 		this.logger = loggingService.getLogger("Ionic.Feedback.Sample.SettingsPage");
 		const methodName = "ctor";
 		this.logger.entry(methodName);
+
+		this.attachmentStates = Object.keys(AttachmentState)
+			.map((value) => parseInt(value, 10))
+			.filter((value) => !isNaN(value))
+			.map((value) => ({ value, text: AttachmentState[value] as string }));
 
 		this.configuration = feedbackService.configuration;
 		this.contact = feedbackService.contact;
@@ -100,7 +106,7 @@ export class SettingsPage {
 		this.logger.exit(methodName);
 	}
 
-	public save(): void {
+	public async save(): Promise<void> {
 		const methodName = "save";
 		this.logger.entry(methodName);
 
@@ -116,7 +122,7 @@ export class SettingsPage {
 		this.configuration.attachAppInfo = this.attachAppInfo;
 		this.configuration.attachLogMessages = this.attachLogMessages;
 
-		this.viewController.dismiss();
+		await this.viewController.dismiss();
 
 		this.logger.exit(methodName);
 	}

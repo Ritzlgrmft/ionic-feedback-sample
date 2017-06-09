@@ -18,6 +18,6 @@
 		"attachScreenshot": true,
 		"attachDeviceInfo": true,
 		"attachAppInfo": true,
-		"attachLogMessages": true
+		"attachLogMessages": "Ask"
 	}
 }

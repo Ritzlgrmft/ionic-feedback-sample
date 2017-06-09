@@ -1,4 +1,5 @@
 import { FeedbackViewerTranslation } from "../viewer/feedback-viewer-translation.model";
+import { AttachmentState } from "./attachment-state.model";
 
 export interface FeedbackConfiguration {
 
@@ -12,5 +13,5 @@ export interface FeedbackConfiguration {
 	attachScreenshot: boolean;
 	attachDeviceInfo: boolean;
 	attachAppInfo: boolean;
-	attachLogMessages: boolean;
+	attachLogMessages: AttachmentState;
 }

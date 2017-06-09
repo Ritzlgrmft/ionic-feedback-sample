@@ -10,6 +10,7 @@ import { Logger, LoggingService, LogMessage } from "ionic-logging-service";
 
 import { FeedbackService } from "../service/feedback.service";
 import { AppInfo } from "../shared/app-info.model";
+import { AttachmentState } from "../shared/attachment-state.model";
 import { FeedbackViewerTranslation } from "./feedback-viewer-translation.model";
 
 /**
@@ -58,10 +59,8 @@ export class FeedbackViewerModalComponent implements OnInit {
 	 */
 	private translation: FeedbackViewerTranslation;
 
-	// tslint:disable-next-line:completed-docs
 	private logger: Logger;
 
-	// tslint:disable-next-line:completed-docs
 	private translations: { [language: string]: FeedbackViewerTranslation; };
 
 	constructor(
@@ -70,7 +69,6 @@ export class FeedbackViewerModalComponent implements OnInit {
 		platform: Platform,
 		private alertController: AlertController,
 		private loadingController: LoadingController,
-		private http: Http,
 		loggingService: LoggingService,
 		private feedbackService: FeedbackService) {
 
@@ -98,9 +96,10 @@ export class FeedbackViewerModalComponent implements OnInit {
 		this.appInfo = navParams.get("appInfo");
 		this.showAppInfo = (typeof this.appInfo !== "undefined");
 
-		this.includeLogMessages = true;
 		this.logMessages = navParams.get("logMessages");
-		this.showLogMessages = (typeof this.logMessages !== "undefined");
+		const attachLogMessages: AttachmentState = navParams.get("attachLogMessages");
+		this.includeLogMessages = attachLogMessages === AttachmentState.Yes || attachLogMessages === AttachmentState.Ask;
+		this.includeLogMessages = attachLogMessages === AttachmentState.Ask;
 
 		this.timestamp = moment().toISOString();
 		this.name = navParams.get("name");

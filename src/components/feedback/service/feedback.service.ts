@@ -9,6 +9,7 @@ import { ConfigurationService } from "ionic-configuration-service";
 import { Logger, LoggingService, LogMessage } from "ionic-logging-service";
 
 import { AppInfo } from "../shared/app-info.model";
+import { AttachmentState } from "../shared/attachment-state.model";
 import { FeedbackConfiguration } from "../shared/feedback-configuration.model";
 import { FeedbackContact } from "../shared/feedback-contact.model";
 
@@ -103,6 +104,11 @@ export class FeedbackService {
 		if (typeof configuration === "undefined") {
 			this.logger.error(methodName, "configuration missing");
 			throw new Error("FeedbackService: configuation missing");
+		}
+
+		// map enum values
+		if (typeof configuration.attachLogMessages === "string") {
+			configuration.attachLogMessages = AttachmentState[configuration.attachLogMessages as any] as any as AttachmentState;
 		}
 
 		this.configuration = configuration;
