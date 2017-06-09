@@ -75,14 +75,14 @@ export class FeedbackViewerModalManager {
 		categories: string[] = this.configuration.categories,
 		name: string | undefined = this.contact.name,
 		email: string | undefined = this.contact.email,
-		attachScreenshot: boolean = this.configuration.attachScreenshot,
-		attachDeviceInfo: boolean = this.configuration.attachDeviceInfo,
-		attachAppInfo: boolean = this.configuration.attachAppInfo,
+		attachScreenshot: AttachmentState = this.configuration.attachScreenshot,
+		attachDeviceInfo: AttachmentState = this.configuration.attachDeviceInfo,
+		attachAppInfo: AttachmentState = this.configuration.attachAppInfo,
 		attachLogMessages: AttachmentState = this.configuration.attachLogMessages): Promise<void> {
 
 		// retrieve log messages (as soon as possible)
 		let logMessages: LogMessage[] | undefined;
-		if (attachLogMessages) {
+		if (attachLogMessages === AttachmentState.Ask || attachLogMessages === AttachmentState.Yes) {
 			// thanks to slice(), the array is cloned
 			logMessages = this.loggingService.getLogMessages().slice(0);
 		}
@@ -101,44 +101,64 @@ export class FeedbackViewerModalManager {
 
 			// take screenshot
 			let screenshot: string | undefined;
-			if (attachScreenshot) {
+			if (attachScreenshot === AttachmentState.Ask || attachScreenshot === AttachmentState.Yes) {
 				try {
 					if (await this.platform.ready() === "cordova") {
 						screenshot = (await this.screenshot.URI()).URI;
 						this.logger.debug(methodName, "screenshot taken");
 					} else {
 						this.logger.debug(methodName, "no screenshot taken since not running on device");
+						attachScreenshot = AttachmentState.No;
 					}
 				} catch (e) {
 					this.logger.error(methodName, "could not take screenshot", e);
+					attachScreenshot = AttachmentState.No;
 				}
 			}
 
 			// retrieve device info
-			const deviceInfo = (this.platform.is("cordova") && attachDeviceInfo) ? this.device : undefined;
+			let deviceInfo: Device | undefined;
+			if (attachDeviceInfo === AttachmentState.Ask || attachDeviceInfo === AttachmentState.Yes) {
+				if (this.platform.is("cordova")) {
+					deviceInfo = this.device;
+				} else {
+					this.logger.debug(methodName, "no device info available since not running on device");
+					attachDeviceInfo = AttachmentState.No;
+				}
+			}
 
 			// retrieve app info
 			let appInfo: AppInfo | undefined;
-			if (this.platform.is("cordova") && attachAppInfo) {
-				appInfo = {
-					appName: await this.appVersion.getAppName(),
-					packageName: await this.appVersion.getPackageName(),
-					versionCode: await this.appVersion.getVersionCode(),
-					versionNumber: await this.appVersion.getVersionNumber(),
-				};
+			if (attachAppInfo === AttachmentState.Ask || attachAppInfo === AttachmentState.Yes) {
+				if (this.platform.is("cordova")) {
+					appInfo = {
+						appName: await this.appVersion.getAppName(),
+						packageName: await this.appVersion.getPackageName(),
+						versionCode: await this.appVersion.getVersionCode(),
+						versionNumber: await this.appVersion.getVersionNumber(),
+					};
+				} else {
+					this.logger.debug(methodName, "no app info available since not running on device");
+					attachAppInfo = AttachmentState.No;
+				}
 			}
 
 			const modal = this.modalController.create(FeedbackViewerModalComponent, {
-				appInfo,
-				attachLogMessages,
+				// tslint:disable:object-literal-sort-keys
 				categories,
-				deviceInfo,
-				email,
-				language,
-				logMessages,
 				name,
+				email,
+				attachLogMessages,
+				logMessages,
+				attachDeviceInfo,
+				deviceInfo,
+				attachAppInfo,
+				appInfo,
+				attachScreenshot,
 				screenshot,
+				language,
 				translation,
+				// tslint:enable:object-literal-sort-keys
 			});
 			modal.onDidDismiss(() => {
 				this.onModalClosed();

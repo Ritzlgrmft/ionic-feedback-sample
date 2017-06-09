@@ -10,8 +10,8 @@ export interface FeedbackConfiguration {
 	language: string;
 	translation: FeedbackViewerTranslation;
 	categories: string[];
-	attachScreenshot: boolean;
-	attachDeviceInfo: boolean;
-	attachAppInfo: boolean;
+	attachScreenshot: AttachmentState;
+	attachDeviceInfo: AttachmentState;
+	attachAppInfo: AttachmentState;
 	attachLogMessages: AttachmentState;
 }

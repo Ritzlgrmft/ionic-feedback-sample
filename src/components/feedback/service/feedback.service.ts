@@ -82,7 +82,7 @@ export class FeedbackService {
 		};
 
 		try {
-			this.logger.debug(methodName, `before POST ${this.configuration.url}`);
+			this.logger.debug(methodName, `before POST ${this.configuration.url}`, body);
 			await this.http.post(this.configuration.url, JSON.stringify(body),
 				{ headers, withCredentials: true }).toPromise();
 			this.logger.debug(methodName, `after POST ${this.configuration.url}`);
@@ -109,6 +109,15 @@ export class FeedbackService {
 		// map enum values
 		if (typeof configuration.attachLogMessages === "string") {
 			configuration.attachLogMessages = AttachmentState[configuration.attachLogMessages as any] as any as AttachmentState;
+		}
+		if (typeof configuration.attachDeviceInfo === "string") {
+			configuration.attachDeviceInfo = AttachmentState[configuration.attachDeviceInfo as any] as any as AttachmentState;
+		}
+		if (typeof configuration.attachAppInfo === "string") {
+			configuration.attachAppInfo = AttachmentState[configuration.attachAppInfo as any] as any as AttachmentState;
+		}
+		if (typeof configuration.attachScreenshot === "string") {
+			configuration.attachScreenshot = AttachmentState[configuration.attachScreenshot as any] as any as AttachmentState;
 		}
 
 		this.configuration = configuration;

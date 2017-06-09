@@ -84,22 +84,25 @@ export class FeedbackViewerModalComponent implements OnInit {
 			this.showCategories = false;
 		}
 
-		this.includeScreenshot = true;
 		this.screenshot = navParams.get("screenshot");
-		this.showScreenshot = (typeof this.screenshot !== "undefined");
+		const attachScreenshot: AttachmentState = navParams.get("attachScreenshot");
+		this.includeScreenshot = attachScreenshot === AttachmentState.Yes || attachScreenshot === AttachmentState.Ask;
+		this.showScreenshot = attachScreenshot === AttachmentState.Ask;
 
-		this.includeDeviceInfo = true;
 		this.deviceInfo = navParams.get("deviceInfo");
-		this.showDeviceInfo = (typeof this.deviceInfo !== "undefined");
+		const attachDeviceInfo: AttachmentState = navParams.get("attachDeviceInfo");
+		this.includeDeviceInfo = attachDeviceInfo === AttachmentState.Yes || attachDeviceInfo === AttachmentState.Ask;
+		this.showDeviceInfo = attachDeviceInfo === AttachmentState.Ask;
 
-		this.includeAppInfo = true;
 		this.appInfo = navParams.get("appInfo");
-		this.showAppInfo = (typeof this.appInfo !== "undefined");
+		const attachAppInfo: AttachmentState = navParams.get("attachAppInfo");
+		this.includeAppInfo = attachAppInfo === AttachmentState.Yes || attachAppInfo === AttachmentState.Ask;
+		this.showAppInfo = attachAppInfo === AttachmentState.Ask;
 
 		this.logMessages = navParams.get("logMessages");
 		const attachLogMessages: AttachmentState = navParams.get("attachLogMessages");
 		this.includeLogMessages = attachLogMessages === AttachmentState.Yes || attachLogMessages === AttachmentState.Ask;
-		this.includeLogMessages = attachLogMessages === AttachmentState.Ask;
+		this.showLogMessages = attachLogMessages === AttachmentState.Ask;
 
 		this.timestamp = moment().toISOString();
 		this.name = navParams.get("name");

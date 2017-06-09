@@ -38,9 +38,9 @@ export class SettingsPage {
 	public email: string | undefined;
 
 	public attachmentStates: Array<{ value: number, text: string }>;
-	public attachScreenshot: boolean;
-	public attachDeviceInfo: boolean;
-	public attachAppInfo: boolean;
+	public attachScreenshot: AttachmentState;
+	public attachDeviceInfo: AttachmentState;
+	public attachAppInfo: AttachmentState;
 	public attachLogMessages: AttachmentState;
 
 	private logger: Logger;

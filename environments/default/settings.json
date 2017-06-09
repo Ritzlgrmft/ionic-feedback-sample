@@ -15,9 +15,9 @@
 			"Issue",
 			"Suggestion"
 		],
-		"attachScreenshot": true,
-		"attachDeviceInfo": true,
-		"attachAppInfo": true,
+		"attachScreenshot": "Ask",
+		"attachDeviceInfo": "Ask",
+		"attachAppInfo": "Ask",
 		"attachLogMessages": "Ask"
 	}
 }

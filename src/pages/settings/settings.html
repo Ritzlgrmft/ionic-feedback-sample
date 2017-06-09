@@ -133,15 +133,21 @@
 		<ion-list>
 			<ion-item>
 				<ion-label>Attach Screenshot</ion-label>
-				<ion-toggle [(ngModel)]="attachScreenshot"></ion-toggle>
+				<ion-select [(ngModel)]="attachScreenshot" interface="popover">
+					<ion-option *ngFor="let state of attachmentStates" [value]="state.value">{{state.text}}</ion-option>
+				</ion-select>
 			</ion-item>
 			<ion-item>
 				<ion-label>Attach Device Info</ion-label>
-				<ion-toggle [(ngModel)]="attachDeviceInfo"></ion-toggle>
+				<ion-select [(ngModel)]="attachDeviceInfo" interface="popover">
+					<ion-option *ngFor="let state of attachmentStates" [value]="state.value">{{state.text}}</ion-option>
+				</ion-select>
 			</ion-item>
 			<ion-item>
 				<ion-label>Attach App Info</ion-label>
-				<ion-toggle [(ngModel)]="attachAppInfo"></ion-toggle>
+				<ion-select [(ngModel)]="attachAppInfo" interface="popover">
+					<ion-option *ngFor="let state of attachmentStates" [value]="state.value">{{state.text}}</ion-option>
+				</ion-select>
 			</ion-item>
 			<ion-item>
 				<ion-label>Attach Log Messages</ion-label>
