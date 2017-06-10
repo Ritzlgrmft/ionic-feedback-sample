@@ -72,6 +72,7 @@ export class SettingsPage {
 			this.translation = this.configuration.translation;
 		} else {
 			this.translation = {
+				// tslint:disable:object-literal-sort-keys
 				cancel: "myCancel",
 				email: "myEmail",
 				errorSending: "myErrorSending",
@@ -84,6 +85,21 @@ export class SettingsPage {
 				ok: "myOk",
 				send: "mySend",
 				title: "myTitle",
+
+				manufacturer: "myManufacturer",
+				model: "myModel",
+				uuid: "myUUID",
+				serial: "mySerial",
+				platform: "myPlatform",
+				version: "myVersion",
+				cordova: "myCordova",
+				isVirtual: "myIsVirtual",
+
+				appName: "myAppName",
+				packageName: "myPacketName",
+				versionCode: "myVersionCode",
+				versionNumber: "myVersionNumber",
+				// tslint:enable:object-literal-sort-keys
 			};
 		}
 		this.categories = this.configuration.categories;

@@ -63,4 +63,64 @@ export interface FeedbackViewerTranslation {
 	 * Error message, if feedback could not be sent.
 	 */
 	errorSending: string;
+
+	/**
+	 * Manufacturer (part of device info).
+	 */
+	manufacturer: string;
+
+	/**
+	 * Model (part of device info).
+	 */
+	model: string;
+
+	/**
+	 * UUID (part of device info).
+	 */
+	uuid: string;
+
+	/**
+	 * Serial (part of device info).
+	 */
+	serial: string;
+
+	/**
+	 * Platform (part of device info).
+	 */
+	platform: string;
+
+	/**
+	 * Version (part of device info).
+	 */
+	version: string;
+
+	/**
+	 * Cordova version (part of device info).
+	 */
+	cordova: string;
+
+	/**
+	 * Flag if device is virtual (part of device info).
+	 */
+	isVirtual: string;
+
+	/**
+	 * Name of the app (part of app info).
+	 */
+	appName: string;
+
+	/**
+	 * Name of the package (part of app info).
+	 */
+	packageName: string;
+
+	/**
+	 * Version code of the app (part of app info).
+	 */
+	versionCode: string;
+
+	/**
+	 * Version number of the app (part of app info).
+	 */
+	versionNumber: string;
 }

@@ -60,35 +60,35 @@
 		</ion-card-header>
 		<ion-list *ngIf="includeDeviceInfo">
 			<ion-item>
-				<div item-left>Manufacturer</div>
+				<div item-left>{{ getTranslation().manufacturer }}</div>
 				<div item-right text-right>{{deviceInfo.manufacturer}}</div>
 			</ion-item>
 			<ion-item>
-				<div item-left>Model</div>
+				<div item-left>{{ getTranslation().model }}</div>
 				<div item-right text-right>{{deviceInfo.model}}</div>
 			</ion-item>
 			<ion-item>
-				<div item-left>UUID</div>
+				<div item-left>{{ getTranslation().uuid }}</div>
 				<div item-right text-right>{{deviceInfo.uuid}}</div>
 			</ion-item>
 			<ion-item>
-				<div item-left>Serial</div>
+				<div item-left>{{ getTranslation().serial }}</div>
 				<div item-right text-right>{{deviceInfo.serial}}</div>
 			</ion-item>
 			<ion-item>
-				<div item-left>Platform</div>
+				<div item-left>{{ getTranslation().platform }}</div>
 				<div item-right text-right>{{deviceInfo.platform}}</div>
 			</ion-item>
 			<ion-item>
-				<div item-left>Version</div>
+				<div item-left>{{ getTranslation().version }}</div>
 				<div item-right text-right>{{deviceInfo.version}}</div>
 			</ion-item>
 			<ion-item>
-				<div item-left>Cordova</div>
+				<div item-left>{{ getTranslation().cordova }}</div>
 				<div item-right text-right>{{deviceInfo.cordova}}</div>
 			</ion-item>
 			<ion-item>
-				<div item-left>IsVirtual</div>
+				<div item-left>{{ getTranslation().isVirtual }}</div>
 				<div item-right text-right>{{deviceInfo.isVirtual}}</div>
 			</ion-item>
 		</ion-list>
@@ -103,19 +103,19 @@
 		</ion-card-header>
 		<ion-list *ngIf="includeAppInfo">
 			<ion-item>
-				<div item-left>AppName</div>
+				<div item-left>{{ getTranslation().appName }}</div>
 				<div item-right text-right>{{appInfo.appName}}</div>
 			</ion-item>
 			<ion-item>
-				<div item-left>PackageName</div>
+				<div item-left>{{ getTranslation().packageName }}</div>
 				<div item-right text-right>{{appInfo.packageName}}</div>
 			</ion-item>
 			<ion-item>
-				<div item-left>VersionCode</div>
+				<div item-left>{{ getTranslation().versionCode }}</div>
 				<div item-right text-right>{{appInfo.versionCode}}</div>
 			</ion-item>
 			<ion-item>
-				<div item-left>VersionNumber</div>
+				<div item-left>{{ getTranslation().versionNumber }}</div>
 				<div item-right text-right>{{appInfo.versionNumber}}</div>
 			</ion-item>
 		</ion-list>

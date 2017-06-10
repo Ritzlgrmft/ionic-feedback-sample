@@ -123,6 +123,7 @@ export class FeedbackViewerModalComponent implements OnInit {
 		this.translations = {};
 		// tslint:disable-next-line:no-string-literal
 		this.translations["en"] = {
+			// tslint:disable:object-literal-sort-keys
 			cancel: "Cancel",
 			email: "Email",
 			errorSending: "Could not send feedback",
@@ -135,9 +136,25 @@ export class FeedbackViewerModalComponent implements OnInit {
 			ok: "OK",
 			send: "Send",
 			title: "Feedback",
+
+			manufacturer: "Manufacturer",
+			model: "Model",
+			uuid: "UUID",
+			serial: "Serial",
+			platform: "Platform",
+			version: "Version",
+			cordova: "Cordova",
+			isVirtual: "IsVirtual",
+
+			appName: "AppName",
+			packageName: "PackageName",
+			versionCode: "VersionCode",
+			versionNumber: "VersionNumber",
+			// tslint:enable:object-literal-sort-keys
 		};
 		// tslint:disable-next-line:no-string-literal
 		this.translations["de"] = {
+			// tslint:disable:object-literal-sort-keys
 			cancel: "Abbrechen",
 			email: "Email",
 			errorSending: "Feedback konnte nicht gesendet werden",
@@ -150,6 +167,21 @@ export class FeedbackViewerModalComponent implements OnInit {
 			ok: "OK",
 			send: "Senden",
 			title: "Feedback",
+
+			manufacturer: "Hersteller",
+			model: "Modell",
+			uuid: "UUID",
+			serial: "Seriennummer",
+			platform: "Plattform",
+			version: "Version",
+			cordova: "Cordova",
+			isVirtual: "Virtuell",
+
+			appName: "Appname",
+			packageName: "Packetname",
+			versionCode: "Versionscode",
+			versionNumber: "Versionsnummer",
+			// tslint:enable:object-literal-sort-keys
 		};
 	}
 
