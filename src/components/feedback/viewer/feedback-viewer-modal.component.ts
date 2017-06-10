@@ -189,10 +189,10 @@ export class FeedbackViewerModalComponent implements OnInit {
 				this.message,
 				this.name,
 				this.email,
-				this.showScreenshot && this.includeScreenshot ? this.screenshot : undefined,
-				this.showDeviceInfo && this.includeDeviceInfo ? this.deviceInfo : undefined,
-				this.showAppInfo && this.includeAppInfo ? this.appInfo : undefined,
-				this.showLogMessages && this.includeLogMessages ? this.logMessages : undefined,
+				this.includeScreenshot ? this.screenshot : undefined,
+				this.includeDeviceInfo ? this.deviceInfo : undefined,
+				this.includeAppInfo ? this.appInfo : undefined,
+				this.includeLogMessages ? this.logMessages : undefined,
 			);
 			await loading.dismiss();
 			this.viewController.dismiss();

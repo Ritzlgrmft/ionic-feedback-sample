@@ -1,0 +1,23 @@
+{
+	"logging": {
+		"logLevels": [
+			{
+				"loggerName": "root",
+				"logLevel": "DEBUG"
+			}
+		]
+	},
+	"feedback": {
+		"isEnabled": true,
+		"url": "http://localhost:5000/api/Feedback",
+		"language": "en",
+		"categories": [
+			"Issue",
+			"Suggestion"
+		],
+		"attachScreenshot": "Ask",
+		"attachDeviceInfo": "Ask",
+		"attachAppInfo": "Ask",
+		"attachLogMessages": "Ask"
+	}
+}

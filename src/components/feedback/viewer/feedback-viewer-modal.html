@@ -39,7 +39,7 @@
 
 	<ion-card *ngIf="showScreenshot">
 		<ion-card-header>
-			<ion-item *ngIf="showScreenshot">
+			<ion-item>
 				<ion-label>{{ getTranslation().includeScreenshot }}</ion-label>
 				<ion-checkbox [(ngModel)]="includeScreenshot"></ion-checkbox>
 			</ion-item>
