@@ -10,8 +10,9 @@ import { SplashScreen } from "@ionic-native/splash-screen";
 import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
 
 import { ConfigurationService } from "ionic-configuration-service";
+import { FeedbackModule } from "ionic-feedback-module";
 import { LoggingService } from "ionic-logging-service";
-import { FeedbackModule } from "../components/feedback";
+
 import { HomePage } from "../pages/home/home";
 import { SettingsPage } from "../pages/settings/settings";
 import { AppComponent } from "./app.component";

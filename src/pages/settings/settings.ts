@@ -4,9 +4,8 @@ import { ReorderIndexes } from "ionic-angular/components/item/item-reorder";
 
 import { Logger, LoggingService } from "ionic-logging-service";
 
-import { AttachmentState, FeedbackService, FeedbackViewerTranslation } from "../../components/feedback";
-import { FeedbackConfiguration } from "../../components/feedback/shared/feedback-configuration.model";
-import { FeedbackContact } from "../../components/feedback/shared/feedback-contact.model";
+// tslint:disable-next-line:max-line-length
+import { AttachmentState, FeedbackConfiguration, FeedbackContact, FeedbackService, FeedbackViewerTranslation } from "ionic-feedback-module";
 
 /**
  * Home page.

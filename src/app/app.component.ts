@@ -3,8 +3,8 @@ import { Component } from "@angular/core";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { Platform } from "ionic-angular";
 
+import { FeedbackService, FeedbackViewerModalManager } from "ionic-feedback-module";
 import { Logger, LoggingService } from "ionic-logging-service";
-import { FeedbackService, FeedbackViewerModalManager } from "../components/feedback";
 
 import { HomePage } from "../pages/home/home";
 
