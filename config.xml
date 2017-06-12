@@ -80,7 +80,7 @@
 	<plugin name="com.darktalker.cordova.screenshot" spec="https://github.com/gitawego/cordova-screenshot.git" />
 	<plugin name="cordova-plugin-app-version" spec="0.1.9" />
 	<plugin name="cordova-plugin-console" spec="1.0.7" />
-	<plugin name="cordova-plugin-device" spec="^1.1.6" />
-	<plugin name="cordova-plugin-shake" spec="https://github.com/Ritzlgrmft/cordova-plugin-shake.git" />
+	<plugin name="cordova-plugin-device" spec="1.1.6" />
+	<plugin name="cordova-plugin-shake" spec="0.6.0" />
 	<plugin name="cordova-plugin-splashscreen" spec="4.0.3" />
 </widget>
