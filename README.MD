@@ -7,8 +7,7 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 The feedback sample is a small Ionic app demonstrating the usage of
-[ionic-feedback-service](https://github.com/Ritzlgrmft/ionic-feedback-service) and
-[ionic-feedback-viewer](https://github.com/Ritzlgrmft/ionic-feedback-viewer).
+[ionic-feedback-module](https://github.com/Ritzlgrmft/ionic-feedback-module).
 
 ## Screenshots
 
@@ -27,4 +26,4 @@ ionic serve
 
 ## Todos
 
-- split in component and sample
+- ...
