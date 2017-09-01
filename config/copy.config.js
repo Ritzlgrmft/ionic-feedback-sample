@@ -1,8 +1,5 @@
-var envDirectory = "default";
-var envIndex = process.argv.indexOf("--env");
-if (envIndex >= 0 && envIndex < process.argv.length - 1) {
-	envDirectory = process.argv[envIndex + 1];
-}
+var envDirectory = process.env.env || "default";
+process.stdout.write("using environment '" + envDirectory + "'\n");
 
 // this is a custom dictionary to make it easy to extend/override
 // provide a name for an entry, it can be anything such as 'copyAssets' or 'copyFonts'
