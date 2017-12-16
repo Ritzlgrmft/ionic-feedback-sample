@@ -21,7 +21,8 @@ The feedback sample is a small Ionic app demonstrating the usage of
 git clone https://github.com/Ritzlgrmft/ionic-feedback-sample.git
 cd ionic-feedback-sample
 npm install
-ionic serve
+ionic cordova platform add ios
+ionic cordova emulate ios --target iPhone-X --livereload
 ```
 
 ## Todos

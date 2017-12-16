@@ -12,19 +12,34 @@
 			true,
 			"never-prefix"
 		],
+		"whitespace": [
+			true,
+			"check-branch",
+			"check-decl",
+			"check-operator",
+			"check-separator",
+			"check-type"
+		],
+		"import-blacklist": [
+			true,
+			"rxjs"
+		],
+		"no-submodule-imports": [
+			true,
+			"@angular/common",
+			"ionic-angular/components/item",
+			"rxjs"
+		],
 		"directive-selector": [
 			true,
 			"attribute",
-			"sg",
+			"ionic",
 			"camelCase"
 		],
 		"component-selector": [
 			true,
 			"element",
-			[
-				"ionic",
-				"page"
-			],
+			"page",
 			"kebab-case"
 		],
 		"use-input-property-decorator": true,
@@ -36,20 +51,11 @@
 		"no-forward-ref": true,
 		"use-life-cycle-interface": true,
 		"use-pipe-transform-interface": true,
-		"pipe-naming": [
-			true,
-			"camelCase",
-			"sg"
-		],
 		"component-class-suffix": [
 			true,
 			"Component",
 			"Page"
 		],
-		"directive-class-suffix": true,
-		"import-destructuring-spacing": true,
-		"templates-use-public": true,
-		"no-access-missing-member": true,
-		"invoke-injectable": true
+		"directive-class-suffix": true
 	}
 }

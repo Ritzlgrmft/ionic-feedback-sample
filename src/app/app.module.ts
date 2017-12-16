@@ -1,5 +1,4 @@
 import { APP_INITIALIZER, ErrorHandler, NgModule } from "@angular/core";
-import { HttpModule } from "@angular/http";
 import { BrowserModule } from "@angular/platform-browser";
 
 import { AppVersion } from "@ionic-native/app-version";
@@ -43,7 +42,6 @@ export function loadConfiguration(configurationService: ConfigurationService): (
 	imports: [
 		BrowserModule,
 		FeedbackModule,
-		HttpModule,
 		IonicModule.forRoot(AppComponent),
 	],
 	providers: [
