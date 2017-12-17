@@ -24,7 +24,3 @@ npm install
 ionic cordova platform add ios
 ionic cordova emulate ios --target iPhone-X --livereload
 ```
-
-## Todos
-
-- ...
