@@ -16,7 +16,9 @@
     "ionic:serve": "ionic-app-scripts serve",
     "lint": "tslint --project tsconfig.json --format verbose",
     "test": "npm run lint && npm run ionic:build && npm run ionic:build --prod",
-    "semantic-release": "semantic-release pre && semantic-release post"
+    "semantic-release": "semantic-release pre && semantic-release post",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "config": {
     "ionic_copy": "./config/copy.config.js",
@@ -58,7 +60,8 @@
     "moment": "2.20.0",
     "rxjs": "5.5.5",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.18"
+    "zone.js": "0.8.18",
+    "snyk": "^1.88.0"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.5",
@@ -82,5 +85,6 @@
     "platforms": [
       "ios"
     ]
-  }
+  },
+  "snyk": true
 }
