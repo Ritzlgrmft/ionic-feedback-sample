@@ -15,7 +15,7 @@
 		"ionic:build": "ionic-app-scripts build",
 		"ionic:serve": "ionic-app-scripts serve",
 		"lint": "tslint --project tsconfig.json --format verbose",
-		"test": "npm run lint && npm run ionic:build && npm run ionic:build --prod",
+		"test": "snyk test && npm run lint && npm run ionic:build && npm run ionic:build --prod",
 		"semantic-release": "semantic-release pre && semantic-release post",
 		"snyk-protect": "snyk protect",
 		"prepare": "npm run snyk-protect"
@@ -59,7 +59,6 @@
 		"ionicons": "4.2.4",
 		"moment": "2.22.2",
 		"rxjs": "5.5.5",
-		"snyk": "1.88.2",
 		"sw-toolbox": "3.6.0",
 		"zone.js": "0.8.18"
 	},
@@ -69,6 +68,7 @@
 		"codelyzer": "4.4.2",
 		"ionic": "3.20.0",
 		"semantic-release": "15.6.3",
+		"snyk": "1.88.2",
 		"tslint": "5.10.0",
 		"typescript": "2.4.2"
 	},
