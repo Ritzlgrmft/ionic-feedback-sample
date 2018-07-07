@@ -87,10 +87,10 @@
     <plugin name="com.darktalker.cordova.screenshot" spec="https://github.com/gitawego/cordova-screenshot.git" />
     <plugin name="cordova-plugin-app-version" spec="0.1.9" />
     <plugin name="cordova-plugin-shake" spec="0.6.0" />
-    <plugin name="cordova-plugin-device" spec="1.1.7" />
-    <plugin name="cordova-plugin-splashscreen" spec="4.1.0" />
-    <plugin name="cordova-plugin-ionic-webview" spec="1.1.16" />
-    <plugin name="cordova-plugin-statusbar" spec="2.3.0" />
+    <plugin name="cordova-plugin-device" spec="2.0.2" />
+    <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
+    <plugin name="cordova-plugin-ionic-webview" spec="1.2.1" />
+    <plugin name="cordova-plugin-statusbar" spec="2.4.2" />
     <engine name="ios" spec="~4.5.4" />
     <preference name="SplashScreenDelay" value="3000" />
 </widget>
