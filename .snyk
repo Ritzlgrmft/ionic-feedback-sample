@@ -5,60 +5,64 @@ patch:
   'npm:lodash:20180130':
     - cordova-ios > plist > xmlbuilder > lodash:
         patched: '2018-07-02T22:24:32.093Z'
+      cordova-ios > cordova-common > plist > xmlbuilder > lodash:
+        patched: '2018-07-08T09:51:16.280Z'
     - cordova-ios > ios-sim > plist > xmlbuilder > lodash:
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
     - cordova-ios > cordova-common > plist > xmlbuilder > lodash:
         patched: '2018-07-02T22:24:32.093Z'
+      cordova-ios > plist > xmlbuilder > lodash:
+        patched: '2018-07-08T09:51:16.280Z'
     - cordova-ios > cordova-common > plist > xmlbuilder > lodash:
         patched: '2018-07-07T15:56:03.363Z'
     - cordova-ios > plist > xmlbuilder > lodash:
         patched: '2018-07-07T15:56:03.363Z'
   'npm:debug:20170905':
     - ionic-feedback-module > @angular/compiler-cli > chokidar > fsevents > node-pre-gyp > tar-pack > debug:
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
     - '@angular/compiler-cli > chokidar > fsevents > node-pre-gyp > tar-pack > debug':
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
   'npm:hoek:20180212':
     - '@angular/compiler-cli > chokidar > fsevents > node-pre-gyp > hawk > boom > hoek':
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
     - '@angular/compiler-cli > chokidar > fsevents > node-pre-gyp > hawk > sntp > hoek':
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
     - '@angular/compiler-cli > chokidar > fsevents > node-pre-gyp > hawk > cryptiles > boom > hoek':
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
     - '@angular/compiler-cli > chokidar > fsevents > node-pre-gyp > request > hawk > hoek':
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
     - '@angular/compiler-cli > chokidar > fsevents > node-pre-gyp > request > hawk > boom > hoek':
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
     - '@angular/compiler-cli > chokidar > fsevents > node-pre-gyp > request > hawk > sntp > hoek':
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
     - '@angular/compiler-cli > chokidar > fsevents > node-pre-gyp > request > hawk > cryptiles > boom > hoek':
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
     - ionic-feedback-module > @angular/compiler-cli > chokidar > fsevents > node-pre-gyp > hawk > hoek:
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
     - ionic-feedback-module > @angular/compiler-cli > chokidar > fsevents > node-pre-gyp > hawk > boom > hoek:
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
     - ionic-feedback-module > @angular/compiler-cli > chokidar > fsevents > node-pre-gyp > hawk > sntp > hoek:
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
     - ionic-feedback-module > @angular/compiler-cli > chokidar > fsevents > node-pre-gyp > hawk > cryptiles > boom > hoek:
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
     - ionic-feedback-module > @angular/compiler-cli > chokidar > fsevents > node-pre-gyp > request > hawk > hoek:
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
     - ionic-feedback-module > @angular/compiler-cli > chokidar > fsevents > node-pre-gyp > request > hawk > boom > hoek:
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
     - ionic-feedback-module > @angular/compiler-cli > chokidar > fsevents > node-pre-gyp > request > hawk > sntp > hoek:
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
     - ionic-feedback-module > @angular/compiler-cli > chokidar > fsevents > node-pre-gyp > request > hawk > cryptiles > boom > hoek:
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
     - '@angular/compiler-cli > chokidar > fsevents > node-pre-gyp > hawk > hoek':
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
   'npm:stringstream:20180511':
     - ionic-feedback-module > @angular/compiler-cli > chokidar > fsevents > node-pre-gyp > request > stringstream:
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
     - '@angular/compiler-cli > chokidar > fsevents > node-pre-gyp > request > stringstream':
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
   'npm:tough-cookie:20170905':
     - ionic-feedback-module > @angular/compiler-cli > chokidar > fsevents > node-pre-gyp > request > tough-cookie:
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
     - '@angular/compiler-cli > chokidar > fsevents > node-pre-gyp > request > tough-cookie':
-        patched: '2018-07-07T15:56:03.363Z'
+        patched: '2018-07-08T09:51:16.280Z'
 ignore: {}
