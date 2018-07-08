@@ -15,7 +15,7 @@
 		"ionic:build": "ionic-app-scripts build",
 		"ionic:serve": "ionic-app-scripts serve",
 		"lint": "tslint --project tsconfig.json --format verbose",
-		"test": "snyk test && npm run lint && npm run ionic:build && npm run ionic:build --prod",
+		"test": "npm run lint && npm run ionic:build && npm run ionic:build --prod",
 		"semantic-release": "semantic-release pre && semantic-release post",
 		"snyk-protect": "snyk protect",
 		"prepare": "npm run snyk-protect"
