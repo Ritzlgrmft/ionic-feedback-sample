@@ -75,8 +75,9 @@ export class SettingsModalComponent implements OnInit {
 			.filter((value) => !isNaN(value))
 			.map((value) => ({ value, text: AttachmentState[value] as string }));
 
-		this.configuration = feedbackService.configuration;
-		this.contact = feedbackService.contact;
+		const { configuration, contact } = feedbackService.getConfiguration();
+		this.configuration = configuration;
+		this.contact = contact;
 
 		this.isAndroid = platform.is("android");
 

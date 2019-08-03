@@ -26,8 +26,8 @@ export class AppComponent {
 		const methodName = "ctor";
 		this.logger.entry(methodName);
 
-		platform.ready().then(() => {
-			if (platform.is("ios")) {
+		platform.ready().then((readySource) => {
+			if (platform.is("ios") && readySource === "cordova") {
 				const iosLogger = cordova.require("cordova/plugin/ios/logger");
 				if (iosLogger) {
 					iosLogger.level("DEBUG");
